@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_navigation"
+    app:startDestination="@id/favorite">
+    <activity
+        android:id="@+id/favorite"
+        android:name="hcmute.fonestore.favorite"
+        android:label="activity_favorite"
+        tools:layout="@layout/activity_favorite" />
+    <activity
+        android:id="@+id/category"
+        android:name="hcmute.fonestore.category"
+        android:label="activity_category"
+        tools:layout="@layout/activity_category" />
+    <activity
+        android:id="@+id/cart"
+        android:name="hcmute.fonestore.cart"
+        android:label="activity_cart"
+        tools:layout="@layout/activity_cart" />
+    <activity
+        android:id="@+id/notification"
+        android:name="hcmute.fonestore.notification"
+        android:label="activity_notification"
+        tools:layout="@layout/activity_notification" />
+</navigation>

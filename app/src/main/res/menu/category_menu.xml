@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Điện thoại Iphone"
+        android:id="@+id/menu_iphone"/>
+
+    <item android:title="Điện thoại Samsung"
+        android:id="@+id/menu_samsung"/>
+
+    <item android:title="Điện thoại Oppo"
+        android:id="@+id/menu_oppo"/>
+
+    <item android:title="Điện thoại Vivo"
+        android:id="@+id/menu_vivo"/>
+
+    <item android:title="Điện thoại Xiaomi"
+        android:id="@+id/menu_xiaomi"/>
+
+    <item android:title="Điện thoại Realme"
+        android:id="@+id/menu_realme"/>
+
+    <item android:title="Điện thoại Nokia"
+        android:id="@+id/menu_nokia"/>
+
+    <item android:title="Phụ kiện điện thoại"
+        android:id="@+id/menu_phukien"/>
+
+    <item android:title="Khác"
+        android:id="@+id/menu_other"/>
+</menu>

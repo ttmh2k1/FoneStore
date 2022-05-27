@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1115" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border0.xml" value="0.197" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border1.xml" value="0.1565" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border10.xml" value="0.157" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border2.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border3.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border4.xml" value="0.1565" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border7.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border8.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border9.xml" value="0.1565" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border_search.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/borderstyle.xml" value="0.1055" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/button_selector.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/button_selector1.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/button_selector2.xml" value="0.1565" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/button_selector3.xml" value="0.169" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/button_selector4.xml" value="0.197" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/curve_bottom.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/gradient_background.xml" value="0.192" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/gradient_background1.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/home_category.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/home_deal.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/home_favorite.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/home_utilities.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/home_wallet.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_cart.xml" value="0.2835" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_cart_event.xml" value="0.1825" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_cart_fill.xml" value="0.156" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_category.xml" value="0.234" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_category_fill.xml" value="0.158" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_comeback.xml" value="0.1955" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_home.xml" value="0.149" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_home_event.xml" value="0.11" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_home_fill.xml" value="0.1215" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1495" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_menu.xml" value="0.202" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_next_right.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_notification.xml" value="0.14" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_profile_fill.xml" value="0.1955" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_search.xml" value="0.202" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_setting_fill.xml" value="0.1215" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/ic_utilities.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/my_gradient_drawable.xml" value="0.266" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/roundstyle.xml" value="0.176" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/searchstyle.xml" value="0.1495" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_add_product.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_bought.xml" value="0.290625" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_cart.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_category.xml" value="0.290625" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_favorite.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_homepage.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_hot.xml" value="0.18888888888888888" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_info.xml" value="0.22" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_notification.xml" value="0.290625" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_product.xml" value="0.28958333333333336" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_productdetail.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_register.xml" value="0.22" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_search.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_settings.xml" value="0.16458333333333333" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_start.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_template.xml" value="0.2802547770700637" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/activity_user.xml" value="0.16666666666666666" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/bottom_dialog.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/bottom_dialog_add.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/button_home_hot.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/button_list.xml" value="0.5" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/button_notify.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_cart.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_category.xml" value="0.3333333333333333" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_comment.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_list.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_notification.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_notify.xml" value="0.2942708333333333" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/cardview_seen.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_category.xml" value="0.22" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_first.xml" value="0.18611111111111112" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_homepage.xml" value="0.290625" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_list.xml" value="0.34024896265560167" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_list_iphone.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_list_phukien.xml" value="0.290625" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_list_samsung.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_list_vivo.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_list_xiaomi.xml" value="0.290625" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_notification.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_notify1.xml" value="0.16666666666666666" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_user.xml" value="0.16666666666666666" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/fragment_utilities.xml" value="0.28615384615384615" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/loading_layout.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/layout/slide_layout.xml" value="0.28958333333333336" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/menu/category_menu.xml" value="0.28958333333333336" />
+        <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/menu/navigation.xml" value="0.18518518518518517" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
