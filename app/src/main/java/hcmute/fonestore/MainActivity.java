@@ -12,9 +12,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import hcmute.fonestore.categoryFragment.listFragment;
-import hcmute.fonestore.notificationFragment.notify1Fragment;
-import hcmute.fonestore.userFragment.userFragment;
+import hcmute.fonestore.fragment.category.listFragment;
+import hcmute.fonestore.fragment.HomeFragment;
+import hcmute.fonestore.fragment.notification.notify1Fragment;
+import hcmute.fonestore.fragment.user.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
     private boolean doubleClick = false;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
                         navigationView.getMenu().findItem(R.id.nav_home).setIcon(R.drawable.ic_home_fill);
-                        fragment = new homeFragment();
+                        fragment = new HomeFragment();
                         newPosition = 1;
                         break;
 
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_utilities:
                         navigationView.getMenu().findItem(R.id.nav_utilities).setIcon(R.drawable.ic_utilities_fill);
-                        fragment = new utilitiesFragment();
+                        fragment = new UtilitiesFragment();
                         newPosition = 3;
                         break;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.nav_profile:
                         navigationView.getMenu().findItem(R.id.nav_profile).setIcon(R.drawable.ic_profile_fill);
-                        fragment = new userFragment();
+                        fragment = new UserFragment();
                         newPosition = 5;
                         break;
                 }
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle getSelection = getIntent().getExtras();
         if (getSelection == null) {
-            loadFragment(new homeFragment(), 1);
+            loadFragment(new HomeFragment(), 1);
         } else {
             loadFragment(new listFragment(), 2);
             bottomNav.setSelectedItemId(R.id.nav_category);

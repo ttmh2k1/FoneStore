@@ -17,9 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.categoryActivity"
-            android:exported="false" />
+        <activity android:name=".Activity.cartActivity" />
+        <activity android:name=".Activity.categoryActivity" />
+        <activity android:name=".Activity.favoriteActivity" />
+        <activity android:name=".Activity.hotActivity" />
+        <activity android:name=".Activity.loginActivity" />
+        <activity android:name=".Activity.productActivity" />
+        <activity android:name=".Activity.productDetailActivity" />
+        <activity android:name=".Activity.registerActivity" />
+        <activity android:name=".Activity.searchActivity" />
     </application>
 
 </manifest>
