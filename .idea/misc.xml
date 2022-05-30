@@ -100,6 +100,23 @@
         <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/menu/category_menu.xml" value="0.28958333333333336" />
         <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/menu/navigation.xml" value="0.18518518518518517" />
         <entry key="..\:/Users/Eunsol/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_category.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_favorite.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_main.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_product.xml" value="0.49074074074074076" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_productdetail.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/activity_register.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/bottom_dialog.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/bottom_dialog_add.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/cardview_seen.xml" value="0.26358695652173914" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_list_vivo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_list_xiaomi.xml" value="0.33" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_notification.xml" value="0.33" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_notify1.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/layout/fragment_thongbao.xml" value="0.365625" />
+        <entry key="..\:/Users/Nancy/Desktop/ltdd/FoneStore/app/src/main/res/xml/root_preferences.xml" value="0.1778115501519757" />
       </map>
     </option>
   </component>

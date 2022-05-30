@@ -1,6 +1,10 @@
 package hcmute.fonestore.Object;
 
+import com.google.firebase.database.Exclude;
+
 public class Product {
+    @Exclude
+    private String id;
 
     private String name, image, category, producer, brand, origin, describe, price, seller;
 
@@ -17,6 +21,27 @@ public class Product {
         this.describe = describe;
         this.price = price;
         this.seller = seller;
+    }
+
+    public Product(String id, String name, String image, String price, String category, String producer, String brand, String origin, String describe, String seller) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.category = category;
+        this.producer = producer;
+        this.brand = brand;
+        this.origin = origin;
+        this.describe = describe;
+        this.price = price;
+        this.seller = seller;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

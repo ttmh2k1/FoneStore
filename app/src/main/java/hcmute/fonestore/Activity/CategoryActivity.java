@@ -6,15 +6,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import hcmute.fonestore.MainActivity;
-import hcmute.fonestore.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class categoryActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
+
+import hcmute.fonestore.MainActivity;
+import hcmute.fonestore.Object.Product;
+import hcmute.fonestore.R;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapter;
+
+public class CategoryActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView back, giohang, home, background;
     Button search;
@@ -22,6 +33,7 @@ public class categoryActivity extends AppCompatActivity implements View.OnClickL
     String danhMuc;
     RecyclerView recyclerView;
     Intent intent;
+    ArrayList<Product> lstCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +50,7 @@ public class categoryActivity extends AppCompatActivity implements View.OnClickL
 
         // Recieve data
         Intent intent = getIntent();
-        danhMuc = intent.getExtras().getString("DanhMuc");
+        danhMuc = intent.getExtras().getString("Category");
 
         search.setText(danhMuc);
         danhmuc.setText(danhMuc);
@@ -47,7 +59,8 @@ public class categoryActivity extends AppCompatActivity implements View.OnClickL
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(categoryActivity.this, MainActivity.class);
+                Intent intent = new Intent(CategoryActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -55,7 +68,8 @@ public class categoryActivity extends AppCompatActivity implements View.OnClickL
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(categoryActivity.this, searchActivity.class);
+                Intent intent = new Intent(CategoryActivity.this, SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -94,7 +108,30 @@ public class categoryActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void queryProduct() {
+        FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("product")
+                .orderByChild("category")
+                .equalTo(danhMuc)
+                .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstCategory = new ArrayList<Product>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Product p = ds.getValue(Product.class);
+                    p.setId(ds.getKey());
+                    lstCategory.add(p);
+                }
+                final RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(CategoryActivity.this, lstCategory);
+                recyclerView.setAdapter(myAdapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(CategoryActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -103,12 +140,14 @@ public class categoryActivity extends AppCompatActivity implements View.OnClickL
             case R.id.category_back:
                 finish();
                 break;
-//            case R.id.btn_category_giohang:
-//                intent = new Intent(categoryActivity.this, GioHangActivity.class);
-//                startActivity(intent);
-//                break;
+            case R.id.btn_category_giohang:
+                intent = new Intent(CategoryActivity.this, CartActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
             case R.id.category_text:
-                intent = new Intent(categoryActivity.this, MainActivity.class);
+                intent = new Intent(CategoryActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Selection", "List");
                 startActivity(intent);
         }

@@ -12,10 +12,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.productActivity;
+import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Product;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
@@ -29,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view ;
+        View view;
         LayoutInflater mInflater = LayoutInflater.from(mContext);
         view = mInflater.inflate(R.layout.cardview_seen,parent,false);
         return new MyViewHolder(view);
@@ -39,15 +41,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_category_title.setText(mData.get(position).getName());
-//        Glide.with(mContext).load(mData.get(position).getImage()).placeholder(R.drawable.img_no_image).into(holder.img_category_thumbnail);
+        Glide.with(mContext).load(mData.get(position).getImage()).placeholder(R.drawable.img_no_image).into(holder.img_category_thumbnail);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, productActivity.class);
+                Intent intent = new Intent(mContext, ProductActivity.class);
+                intent.putExtra("id", mData.get(position).getId());
 
-                // passing data to the book activity
-                intent.putExtra("Name",mData.get(position).getName());
-                // start the activity
                 mContext.startActivity(intent);
             }
         });

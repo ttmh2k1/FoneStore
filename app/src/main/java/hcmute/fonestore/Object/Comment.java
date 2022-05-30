@@ -1,16 +1,36 @@
 package hcmute.fonestore.Object;
 
+import com.google.firebase.database.Exclude;
+
 public class Comment {
-    String comment, id, customerName, image;
+    @Exclude
+    private String id;
+    private String comment, userId, customerName, image;
 
     public Comment() {
     }
 
-    public Comment(String comment, String id, String customerName, String image) {
-        this.comment = comment;
+    public Comment(String id, String comment, String userId, String customerName, String image) {
         this.id = id;
+        this.comment = comment;
+        this.userId = userId;
         this.customerName = customerName;
         this.image = image;
+    }
+
+    public Comment(String comment, String userId, String customerName, String image) {
+        this.comment = comment;
+        this.userId = userId;
+        this.customerName = customerName;
+        this.image = image;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getImage() {
@@ -29,12 +49,12 @@ public class Comment {
         this.comment = comment;
     }
 
-    public String getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getCustomerName() {

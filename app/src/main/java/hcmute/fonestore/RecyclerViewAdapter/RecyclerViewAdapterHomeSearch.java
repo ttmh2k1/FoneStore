@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.searchActivity;
+import hcmute.fonestore.Activity.SearchActivity;
 import hcmute.fonestore.fragment.HomeFragment;
 import hcmute.fonestore.Object.Category;
 
@@ -53,7 +53,7 @@ public class RecyclerViewAdapterHomeSearch extends RecyclerView.Adapter<Recycler
                 }
                 holder.cardView.setBackgroundResource(R.drawable.border2);
 
-                Intent intent = new Intent(mContext.getContext(), searchActivity.class);
+                Intent intent = new Intent(mContext.getContext(), SearchActivity.class);
 
                 // passing data to the book activity
                 intent.putExtra("Search", mData.get(position).getTitle());

@@ -81,20 +81,20 @@
             android:id="@+id/add_new"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/border0"
             android:text="Thêm sản phẩm khác"
-            android:textColor="@color/white"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/add_delete"
             android:layout_width="120dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_selector"
             android:layout_marginStart="50dp"
+            android:background="@drawable/border0"
             android:text="Xóa sản phẩm"
-            android:textColor="@color/white"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

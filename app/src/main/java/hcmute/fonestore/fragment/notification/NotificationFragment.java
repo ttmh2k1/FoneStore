@@ -16,37 +16,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.cartActivity;
+import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Object.CategoryWithThumnail;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterNotification;
 
-public class notificationFragment extends Fragment {
+public class NotificationFragment extends Fragment {
     List<CategoryWithThumnail> lstBtn;
     ImageView cart;
     RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_notification, container, false);
+        View root = inflater.inflate(R.layout.fragment_thongbao, container, false);
 
-        cart = root.findViewById(R.id.btn_notification_cart);
-        recyclerView = root.findViewById(R.id.recyclerView_notification);
+        cart = root.findViewById(R.id.btn_thongbao_giohang);
+        recyclerView = root.findViewById(R.id.recyclerView_thongbao);
 
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), cartActivity.class);
+                Intent intent = new Intent(getActivity(), CartActivity.class);
                 startActivity(intent);
             }
         });
 
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.notification_host_fragment, new notificationFragment()).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.notification_host_fragment, new NotificationFragment2()).commit();
 
         lstBtn = new ArrayList<>();
         lstBtn.add(new CategoryWithThumnail(null, R.drawable.ic_home_fill));
-        lstBtn.add(new CategoryWithThumnail(null,R.drawable.ic_favorite_fill));
-        lstBtn.add(new CategoryWithThumnail(null,R.drawable.ic_deal_fill));
-        lstBtn.add(new CategoryWithThumnail(null,R.drawable.ic_comment_fill));
+        lstBtn.add(new CategoryWithThumnail(null, R.drawable.ic_favorite_fill));
+        lstBtn.add(new CategoryWithThumnail(null, R.drawable.ic_deal_fill));
+        lstBtn.add(new CategoryWithThumnail(null, R.drawable.ic_comment_fill));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);

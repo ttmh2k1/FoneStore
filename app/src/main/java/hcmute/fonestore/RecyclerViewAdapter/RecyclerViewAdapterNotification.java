@@ -15,20 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.fragment.notification.notificationFragment;
-import hcmute.fonestore.fragment.notification.notify1Fragment;
+import hcmute.fonestore.fragment.notification.NotificationFragment;
+import hcmute.fonestore.fragment.notification.NotificationFragment1;
 import hcmute.fonestore.Object.CategoryWithThumnail;
+import hcmute.fonestore.fragment.notification.NotificationFragment2;
 
 
 public class RecyclerViewAdapterNotification extends RecyclerView.Adapter<RecyclerViewAdapterNotification.MyViewHolder> {
 
-    private notificationFragment mContext;
+    private NotificationFragment mContext;
     private List<CategoryWithThumnail> mData;
     List<LinearLayout> cardViewList = new ArrayList<>();
     Fragment newFragment;
     FragmentTransaction transaction;
 
-    public RecyclerViewAdapterNotification(notificationFragment mContext, List<CategoryWithThumnail> mData) {
+    public RecyclerViewAdapterNotification(NotificationFragment mContext, List<CategoryWithThumnail> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -56,7 +57,7 @@ public class RecyclerViewAdapterNotification extends RecyclerView.Adapter<Recycl
                 holder.cardView.setBackgroundResource(R.color.white);
                 switch (position) {
                     case 0:
-                        newFragment = new notificationFragment();
+                        newFragment = new NotificationFragment2();
                         transaction = mContext.getFragmentManager().beginTransaction();
 
                         transaction.replace(R.id.notification_host_fragment, newFragment);
@@ -66,7 +67,7 @@ public class RecyclerViewAdapterNotification extends RecyclerView.Adapter<Recycl
                     case 1:
                     case 2:
                     case 3:
-                        newFragment = new notify1Fragment();
+                        newFragment = new NotificationFragment1();
                         transaction = mContext.getFragmentManager().beginTransaction();
 
                         transaction.replace(R.id.notification_host_fragment, newFragment);

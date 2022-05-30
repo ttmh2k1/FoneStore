@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.productActivity;
+import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Comment;
 
 public class RecyclerViewAdapterComment extends RecyclerView.Adapter<RecyclerViewAdapterComment.MyViewHolder> {
-    private productActivity mContext;
+    private ProductActivity mContext;
     private List<Comment> mData;
 
-    public RecyclerViewAdapterComment(productActivity mContext, List<Comment> mData) {
+    public RecyclerViewAdapterComment(ProductActivity mContext, List<Comment> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }

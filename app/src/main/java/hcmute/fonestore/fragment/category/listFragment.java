@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.cartActivity;
-import hcmute.fonestore.Activity.searchActivity;
+import hcmute.fonestore.Activity.CartActivity;
+import hcmute.fonestore.Activity.SearchActivity;
 import hcmute.fonestore.Object.CategoryWithThumnail;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterList;
 
@@ -37,7 +37,7 @@ public class listFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), cartActivity.class);
+                Intent intent = new Intent(getActivity(), CartActivity.class);
                 startActivity(intent);
             }
         });
@@ -45,7 +45,7 @@ public class listFragment extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), searchActivity.class);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
         });

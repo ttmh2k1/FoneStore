@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hcmute.fonestore">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,23 +11,33 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoneStore">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".Animation.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.cartActivity" />
-        <activity android:name=".Activity.categoryActivity" />
-        <activity android:name=".Activity.favoriteActivity" />
-        <activity android:name=".Activity.hotActivity" />
-        <activity android:name=".Activity.loginActivity" />
-        <activity android:name=".Activity.productActivity" />
-        <activity android:name=".Activity.productDetailActivity" />
-        <activity android:name=".Activity.registerActivity" />
-        <activity android:name=".Activity.searchActivity" />
+
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Activity.CartActivity" />
+        <activity android:name=".Activity.CategoryActivity" />
+        <activity android:name=".Activity.FavoriteActivity" />
+        <activity android:name=".Activity.HotActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.ProductActivity" />
+        <activity android:name=".Activity.ProductDetailActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.SearchActivity" />
+
+        <activity android:name=".fragment.user.AddProductActivity" />
+        <activity android:name=".fragment.user.BoughtActivity" />
+        <activity android:name=".fragment.user.InfoActivity" />
+        <activity android:name=".fragment.user.SettingsActivity" />
+        <activity android:name=".fragment.user.UserActivity" />
+
     </application>
 
 </manifest>

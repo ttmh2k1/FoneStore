@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import hcmute.fonestore.R;
 
-public class productDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends AppCompatActivity {
     TextView textView;
 
     @Override

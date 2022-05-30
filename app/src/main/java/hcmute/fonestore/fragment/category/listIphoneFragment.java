@@ -6,21 +6,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
+import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.categoryActivity;
+import hcmute.fonestore.Activity.CategoryActivity;
 import hcmute.fonestore.Object.CategoryWithThumnail;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapter;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterIphone;
 
 public class listIphoneFragment extends Fragment {
-    ArrayList<CategoryWithThumnail> iphone, ipad, airpods;
+    ArrayList<Product> lstIphone;
     Button category;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,35 +39,36 @@ public class listIphoneFragment extends Fragment {
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), categoryActivity.class);
-                intent.putExtra("category", category.getText());
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                intent.putExtra("Category", category.getText());
                 startActivity(intent);
             }
         });
 
-        iphone = new ArrayList<>();
-        iphone.add(new CategoryWithThumnail("Điện thoại Iphone", R.drawable.img_iphone));
-
         RecyclerView myrv = (RecyclerView) root.findViewById(R.id.recyclerView_iphone);
-        RecyclerViewAdapterIphone myAdapter = new RecyclerViewAdapterIphone(getContext(),iphone);
         myrv.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        myrv.setAdapter(myAdapter);
 
-        ipad = new ArrayList<>();
-        ipad.add(new CategoryWithThumnail("Máy tính bảng Apple", R.drawable.img_ipad));
+        FirebaseDatabase.getInstance().getReference().child("product").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstIphone = new ArrayList<Product>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Product p = ds.getValue(Product.class);
+                    p.setId(ds.getKey());
+                    if (p.getCategory().equals("Điện thoại Iphone"))
+                        lstIphone.add(p);
+                }
 
-        RecyclerView myrv1 = (RecyclerView) root.findViewById(R.id.recyclerView_ipad);
-        RecyclerViewAdapterIphone myAdapter1 = new RecyclerViewAdapterIphone(getContext(),ipad);
-        myrv1.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        myrv1.setAdapter(myAdapter1);
+                RecyclerViewAdapter myAdapterIphone = new RecyclerViewAdapter(getContext(), lstIphone);
+                myrv.setAdapter(myAdapterIphone);
+            }
 
-        airpods = new ArrayList<>();
-        airpods.add(new CategoryWithThumnail("Tai nghe Bluetooth", R.drawable.img_airpods));
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        RecyclerView myrv2 = (RecyclerView) root.findViewById(R.id.recyclerView_airpods);
-        RecyclerViewAdapterIphone myAdapter2 = new RecyclerViewAdapterIphone(getContext(),airpods);
-        myrv2.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        myrv2.setAdapter(myAdapter2);
         return root;
     }
 }

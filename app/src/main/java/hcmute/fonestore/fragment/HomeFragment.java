@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,15 +34,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import hcmute.fonestore.Activity.categoryActivity;
-import hcmute.fonestore.Activity.favoriteActivity;
-import hcmute.fonestore.Activity.hotActivity;
-import hcmute.fonestore.Activity.searchActivity;
+import hcmute.fonestore.Activity.CategoryActivity;
+import hcmute.fonestore.Activity.FavoriteActivity;
+import hcmute.fonestore.Activity.HotActivity;
+import hcmute.fonestore.Activity.SearchActivity;
 import hcmute.fonestore.Animation.viewPagerAdapter;
 import hcmute.fonestore.MainActivity;
 import hcmute.fonestore.Object.Category;
@@ -54,9 +54,8 @@ import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterHomeCategory;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterHomeSearch;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
-
     ArrayList<Category> lstBtnHot;
-    public ArrayList<Product> lstHot, lstIphone, lstSamsung, lstOppo, lstVivo, lstXiaomi;
+    public ArrayList<Product> lstHot, lstFavourite, lstIphone, lstSamsung, lstOppo, lstVivo, lstXiaomi;
     List<Category> lstBtnSearch;
     List<CategoryWithThumnail> lstCategory;
     LinearLayout layoutFavorite;
@@ -71,6 +70,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public View root;
     RecyclerView recyclerViewHot;
+    RecyclerViewAdapter myAdapterFavourite;
 
     int currentPage = 0;
     Timer timer;
@@ -78,6 +78,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
 
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -213,6 +214,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 List<Product> full = new ArrayList<>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+                    p.setId(dataSnapshot1.getKey());
                     full.add(p);
                 }
                 Collections.shuffle(full);
@@ -234,148 +236,156 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         final RecyclerView recyclerViewIphone = (RecyclerView) root.findViewById(R.id.recyclerView_home_iphone);
         recyclerViewIphone.setLayoutManager(layoutManagerIphone);
 
-//        refIphone = FirebaseDatabase.getInstance().getReference().child("product").orderByChild("category").equalTo("Điện thoại Iphone");
-//        refIphone.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                lstIphone = new ArrayList<product>();
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    product p = dataSnapshot1.getValue(product.class);
-//                    lstIphone.add(p);
-//                }
-//                RecyclerViewAdapter myAdapterIphone = new RecyclerViewAdapter(getContext(), lstIphone);
-//                recyclerViewIphone.setAdapter(myAdapterIphone);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        FirebaseDatabase.getInstance().getReference().child("product").orderByChild("category").equalTo("Điện thoại Iphone").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstIphone = new ArrayList<Product>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Product p = dataSnapshot1.getValue(Product.class);
+                    lstIphone.add(p);
+                }
+                RecyclerViewAdapter myAdapterIphone = new RecyclerViewAdapter(getContext(), lstIphone);
+                recyclerViewIphone.setAdapter(myAdapterIphone);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         LinearLayoutManager layoutManagerSamsung = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         final RecyclerView recyclerViewSamsung = (RecyclerView) root.findViewById(R.id.recyclerView_home_samsung);
         recyclerViewSamsung.setLayoutManager(layoutManagerSamsung);
 
-//        refSamsung = FirebaseDatabase.getInstance().getReference().child("product").orderByChild("category").equalTo("Điện thoại Samsung");
-//        refSamsung.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                lstSamsung = new ArrayList<product>();
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    product p = dataSnapshot1.getValue(product.class);
-//                    lstSamsung.add(p);
-//                }
-//                RecyclerViewAdapter myAdapterQuanao = new RecyclerViewAdapter(getContext(), lstSamsung);
-//                recyclerViewSamsung.setAdapter(myAdapterQuanao);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        FirebaseDatabase.getInstance().getReference().child("product").orderByChild("category").equalTo("Điện thoại Samsung").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstSamsung = new ArrayList<Product>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Product p = dataSnapshot1.getValue(Product.class);
+                    lstSamsung.add(p);
+                }
+                RecyclerViewAdapter myAdapterQuanao = new RecyclerViewAdapter(getContext(), lstSamsung);
+                recyclerViewSamsung.setAdapter(myAdapterQuanao);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         LinearLayoutManager layoutManagerOppo = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         final RecyclerView recyclerViewOppo = (RecyclerView) root.findViewById(R.id.recyclerView_home_oppo);
         recyclerViewOppo.setLayoutManager(layoutManagerOppo);
 
-//        refOppo = FirebaseDatabase.getInstance().getReference().child("Product");
-//        refOppo.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                lstOppo = new ArrayList<product>();
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    product p = dataSnapshot1.getValue(product.class);
-//                    if (p.getCategory().equals("Điện thoại Oppo"))
-//                        lstOppo.add(p);
-//                }
-//                RecyclerViewAdapter myAdapterOppo = new RecyclerViewAdapter(getContext(), lstOppo);
-//                recyclerViewOppo.setAdapter(myAdapterOppo);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        FirebaseDatabase.getInstance().getReference().child("product").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstOppo = new ArrayList<Product>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Product p = dataSnapshot1.getValue(Product.class);
+                    if (p.getCategory().equals("Điện thoại Oppo"))
+                        lstOppo.add(p);
+                }
+                RecyclerViewAdapter myAdapterOppo = new RecyclerViewAdapter(getContext(), lstOppo);
+                recyclerViewOppo.setAdapter(myAdapterOppo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         LinearLayoutManager layoutManagerVivo = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         final RecyclerView recyclerViewVivo = (RecyclerView) root.findViewById(R.id.recyclerView_home_vivo);
         recyclerViewVivo.setLayoutManager(layoutManagerVivo);
 
-//        refLamdep = FirebaseDatabase.getInstance().getReference().child("Product");
-//        refLamdep.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                lstVivo = new ArrayList<product>();
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    product p = dataSnapshot1.getValue(product.class);
-//                    if (p.getCategory().equals("Điện thoại Vivo"))
-//                        lstVivo.add(p);
-//                }
-//                RecyclerViewAdapter myAdapterVivo = new RecyclerViewAdapter(getContext(), lstVivo);
-//                recyclerViewVivo.setAdapter(myAdapterVivo);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        FirebaseDatabase.getInstance().getReference().child("product").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstVivo = new ArrayList<Product>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Product p = dataSnapshot1.getValue(Product.class);
+                    if (p.getCategory().equals("Điện thoại Vivo"))
+                        lstVivo.add(p);
+                }
+                RecyclerViewAdapter myAdapterVivo = new RecyclerViewAdapter(getContext(), lstVivo);
+                recyclerViewVivo.setAdapter(myAdapterVivo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         LinearLayoutManager layoutManagerXiaomi = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         final RecyclerView recyclerViewXiaomi = (RecyclerView) root.findViewById(R.id.recyclerView_home_xiaomi);
         recyclerViewXiaomi.setLayoutManager(layoutManagerXiaomi);
 
-//        refXiaomi = FirebaseDatabase.getInstance().getReference().child("Product");
-//        refXiaomi.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                lstXiaomi = new ArrayList<product>();
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    product p = dataSnapshot1.getValue(product.class);
-//                    if (p.getCategory().equals("Điện thoại Xiaomi"))
-//                        lstXiaomi.add(p);
-//                }
-//                RecyclerViewAdapter myAdapterXiaomi = new RecyclerViewAdapter(getContext(), lstXiaomi);
-//                recyclerViewXiaomi.setAdapter(myAdapterXiaomi);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        FirebaseDatabase.getInstance().getReference().child("product").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstXiaomi = new ArrayList<Product>();
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Product p = dataSnapshot1.getValue(Product.class);
+                    if (p.getCategory().equals("Điện thoại Xiaomi"))
+                        lstXiaomi.add(p);
+                }
+                RecyclerViewAdapter myAdapterXiaomi = new RecyclerViewAdapter(getContext(), lstXiaomi);
+                recyclerViewXiaomi.setAdapter(myAdapterXiaomi);
+            }
 
-        LinearLayoutManager layoutManagerSeen = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        final RecyclerView recyclerViewSeen = (RecyclerView) root.findViewById(R.id.recyclerView_home_seen);
-        recyclerViewSeen.setLayoutManager(layoutManagerSeen);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-//        mAuth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//
-//        refSeen = FirebaseDatabase.getInstance().getReference().child("Favourite").child(currentUser.getUid());
-//        refSeen.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                loadingView.setVisibility(GONE);
-//                lstSeen = new ArrayList<product>();
-//                if (dataSnapshot.exists()) layoutFavorite.setVisibility(GONE);
-//                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                    product p = dataSnapshot1.getValue(product.class);
-//                    lstSeen.add(p);
-//                }
-//                RecyclerViewAdapter myAdapterSeen = new RecyclerViewAdapter(getContext(), lstSeen);
-//                recyclerViewSeen.setAdapter(myAdapterSeen);
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        LinearLayoutManager layoutManagerFavourite = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        final RecyclerView recyclerViewFavourite = (RecyclerView) root.findViewById(R.id.recyclerView_home_seen);
+        recyclerViewFavourite.setLayoutManager(layoutManagerFavourite);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        FirebaseDatabase.getInstance().getReference().child("favourite").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loadingView.setVisibility(GONE);
+                lstFavourite = new ArrayList<Product>();
+                if (dataSnapshot.exists())
+                    layoutFavorite.setVisibility(GONE);
+
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    FirebaseDatabase.getInstance().getReference().child("product").child(dataSnapshot1.getValue().toString()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Product p = snapshot.getValue(Product.class);
+                            p.setId(dataSnapshot1.getValue().toString());
+                            lstFavourite.add(p);
+                            myAdapterFavourite.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                myAdapterFavourite = new RecyclerViewAdapter(getContext(), lstFavourite);
+                recyclerViewFavourite.setAdapter(myAdapterFavourite);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setLoadMoreAction() {
@@ -391,40 +401,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.home_search:
-                intent = new Intent(getActivity(), searchActivity.class);
+                intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_iphone:
-                intent = new Intent(getActivity(), categoryActivity.class);
+                intent = new Intent(getActivity(), CategoryActivity.class);
                 intent.putExtra("Category", "Điện thoại Iphone");
                 startActivity(intent);
                 break;
             case R.id.btn_samsung:
-                intent = new Intent(getActivity(), categoryActivity.class);
+                intent = new Intent(getActivity(), CategoryActivity.class);
                 intent.putExtra("Category", "Điện thoại Samsung");
                 startActivity(intent);
                 break;
             case R.id.btn_oppo:
-                intent = new Intent(getActivity(), categoryActivity.class);
+                intent = new Intent(getActivity(), CategoryActivity.class);
                 intent.putExtra("Category", "Điện thoại Oppo");
                 startActivity(intent);
                 break;
             case R.id.btn_vivo:
-                intent = new Intent(getActivity(), categoryActivity.class);
+                intent = new Intent(getActivity(), CategoryActivity.class);
                 intent.putExtra("Category", "Điện thoại Vivo");
                 startActivity(intent);
                 break;
             case R.id.btn_xiaomi:
-                intent = new Intent(getActivity(), categoryActivity.class);
+                intent = new Intent(getActivity(), CategoryActivity.class);
                 intent.putExtra("Category", "Điện thoại Xiaomi");
                 startActivity(intent);
                 break;
             case R.id.home_seen_details:
-                intent = new Intent(getActivity(), favoriteActivity.class);
+                intent = new Intent(getActivity(), FavoriteActivity.class);
                 startActivity(intent);
                 break;
             case R.id.home_hot_details:
-                intent = new Intent(getActivity(), hotActivity.class);
+                intent = new Intent(getActivity(), HotActivity.class);
                 startActivity(intent);
                 break;
             case R.id.home_category_details:

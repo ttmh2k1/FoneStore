@@ -6,21 +6,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
+import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.categoryActivity;
-import hcmute.fonestore.Object.CategoryWithThumnail;
-import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterVivo;
+import hcmute.fonestore.Activity.CategoryActivity;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapter;
 
 public class listVivoFragment extends Fragment {
-    ArrayList<CategoryWithThumnail> vivo;
+    ArrayList<Product> lstVivo;
     Button category;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,19 +37,35 @@ public class listVivoFragment extends Fragment {
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), categoryActivity.class);
-                intent.putExtra("category", category.getText());
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                intent.putExtra("Category", category.getText());
                 startActivity(intent);
             }
         });
 
-        vivo = new ArrayList<>();
-        vivo.add(new CategoryWithThumnail("Điện thoại Vivo", R.drawable.img_vivo));
-
         RecyclerView myrv = (RecyclerView) root.findViewById(R.id.recyclerView_vivo);
-        RecyclerViewAdapterVivo myAdapter = new RecyclerViewAdapterVivo(getContext(),vivo);
         myrv.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        myrv.setAdapter(myAdapter);
+
+        FirebaseDatabase.getInstance().getReference().child("product").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstVivo = new ArrayList<Product>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Product p = ds.getValue(Product.class);
+                    p.setId(ds.getKey());
+                    if (p.getCategory().equals("Điện thoại Vivo"))
+                        lstVivo.add(p);
+                }
+
+                RecyclerViewAdapter myAdapterVivo = new RecyclerViewAdapter(getContext(), lstVivo);
+                myrv.setAdapter(myAdapterVivo);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return root;
     }

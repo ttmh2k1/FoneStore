@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Object.Product;
 
-public class hotActivity extends AppCompatActivity {
+public class HotActivity extends AppCompatActivity {
     ArrayList<Product> lstHot;
     ImageView back;
     ProgressBar loadingView;

@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import hcmute.fonestore.Activity.cartActivity;
-import hcmute.fonestore.Activity.searchActivity;
+import hcmute.fonestore.Activity.CartActivity;
+import hcmute.fonestore.Activity.SearchActivity;
 
 public class UtilitiesFragment extends Fragment {
     ImageView cart;
@@ -26,7 +26,7 @@ public class UtilitiesFragment extends Fragment {
         cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), cartActivity.class);
+                Intent intent = new Intent(getActivity(), CartActivity.class);
                 startActivity(intent);
             }
         });
@@ -34,7 +34,7 @@ public class UtilitiesFragment extends Fragment {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), searchActivity.class);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
         });

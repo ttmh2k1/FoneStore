@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.productActivity;
+import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.CategoryWithThumnail;
 
 public class RecyclerViewAdapterIphone extends RecyclerView.Adapter<RecyclerViewAdapterIphone.MyViewHolder> {
@@ -43,7 +43,7 @@ public class RecyclerViewAdapterIphone extends RecyclerView.Adapter<RecyclerView
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, productActivity.class);
+                Intent intent = new Intent(mContext, ProductActivity.class);
 
                 // passing data to the book activity
                 intent.putExtra("Name",mData.get(position).getTitle());

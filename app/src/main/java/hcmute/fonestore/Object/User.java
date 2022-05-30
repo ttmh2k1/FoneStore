@@ -1,62 +1,62 @@
 package hcmute.fonestore.Object;
 
 public class User {
-    private String Name, Avatar, Address, UID, Email, DOB;
+    private String name, avatar, address, uid, email, joinTime;
 
-    public User(String uid, String name, String avatar, String email, String address, String dob) {
-        Email = email;
-        UID = uid;
-        Name = name;
-        Avatar = avatar;
-        Address = address;
-        DOB = dob;
+    public User(String uid, String name, String avatar, String email, String address, String joinTime) {
+        this.email = email;
+        this.uid = uid;
+        this.name = name;
+        this.avatar = avatar;
+        this.address = address;
+        this.joinTime = joinTime;
     }
 
-    public String getUID() {
-        return UID;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUID(String uid) {
-        this.UID = uid;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getAvatar() {
-        return Avatar;
+        return avatar;
     }
 
     public void setAvatar(String avatar) {
-        Avatar = avatar;
+        this.avatar = avatar;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
-    public String getDOB() {
-        return DOB;
+    public String getJoinTime() {
+        return joinTime;
     }
 
-    public void setDOB(String dob) {
-        DOB = dob;
+    public void setJoinTime(String joinTime) {
+        this.joinTime = joinTime;
     }
 }

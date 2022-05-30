@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 
 import hcmute.fonestore.R;
 
-public class loadingDialog {
+public class LoadingDialog {
 
     Activity activity;
     AlertDialog dialog;
 
-    public loadingDialog(Activity myActivity) {
+    public LoadingDialog(Activity myActivity) {
         activity = myActivity;
     }
 

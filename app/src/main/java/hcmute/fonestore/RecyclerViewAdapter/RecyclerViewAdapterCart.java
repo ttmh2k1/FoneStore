@@ -12,10 +12,12 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.productActivity;
+import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Product;
 
 public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAdapterCart.MyViewHolder> {
@@ -39,17 +41,13 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
         holder.name.setText(mData.get(position).getName());
         holder.producer.setText("Cung cấp bởi " + mData.get(position).getProducer());
         holder.price.setText(mData.get(position).getPrice());
-//        Glide.with(mContext).load(mData.get(position).getHinhAnh()).placeholder(R.drawable.img_no_image).into(holder.image);
+        Glide.with(mContext).load(mData.get(position).getImage()).placeholder(R.drawable.img_no_image).into(holder.image);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, productActivity.class);
-
-                // passing data to the book activity
-                intent.putExtra("Ten", mData.get(position).getName());
-
-                // start the activity
+                Intent intent = new Intent(mContext, ProductActivity.class);
+                intent.putExtra("id", mData.get(position).getId());
                 mContext.startActivity(intent);
             }
         });

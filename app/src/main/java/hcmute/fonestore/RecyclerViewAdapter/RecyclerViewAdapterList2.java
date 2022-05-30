@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.categoryActivity;
+import hcmute.fonestore.Activity.CategoryActivity;
 import hcmute.fonestore.fragment.category.listCategoryFragment;
 import hcmute.fonestore.Object.CategoryWithThumnail;
 
@@ -41,7 +41,7 @@ public class RecyclerViewAdapterList2 extends RecyclerView.Adapter<RecyclerViewA
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_category_title.setText(mData.get(position).getTitle());
         holder.img_category_thumbnail.setImageResource(mData.get(position).getThumbnail());
-        intent = new Intent(mContext.getActivity(), categoryActivity.class);
+        intent = new Intent(mContext.getActivity(), CategoryActivity.class);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

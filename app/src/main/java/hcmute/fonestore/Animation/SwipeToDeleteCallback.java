@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import hcmute.fonestore.R;
 
-abstract public class swipeToDeleteCallback extends ItemTouchHelper.Callback {
+abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     Context mContext;
     private Paint mClearPaint;
     private ColorDrawable mBackground;
@@ -28,7 +28,7 @@ abstract public class swipeToDeleteCallback extends ItemTouchHelper.Callback {
     private int intrinsicHeight;
 
 
-    public swipeToDeleteCallback(Context context) {
+    public SwipeToDeleteCallback(Context context) {
         mContext = context;
         mBackground = new ColorDrawable();
         backgroundColor = Color.parseColor("#b80f0a");

@@ -13,10 +13,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
+import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.productActivity;
+import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Notification;
 
 public class RecyclerViewAdapterNotify extends RecyclerView.Adapter<RecyclerViewAdapterNotify.MyViewHolder> {
@@ -42,19 +45,16 @@ public class RecyclerViewAdapterNotify extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.title.setText(mData.get(position).getTitle());
-        String sourceString = "<b>" + mData.get(position).getCustomer() + "</b> " + " đã bình luận về sản phẩm của bạn";
+        String sourceString = "<b>" + mData.get(position).getCustomerName() + "</b> " + " đã bình luận về sản phẩm của bạn";
         holder.comment.setText(Html.fromHtml(sourceString));
-//        Glide.with(mContext).load(mData.get(position).getImage()).placeholder(R.drawable.noimage).into(holder.thumbnail);
+        Glide.with(mContext).load(mData.get(position).getProductImageLink()).placeholder(R.drawable.img_no_image).into(holder.thumbnail);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, productActivity.class);
+                Intent intent = new Intent(mContext, ProductActivity.class);
 
-                // passing data to the book activity
-                intent.putExtra("Name", mData.get(position).getProduct());
-
-                // start the activity
+                intent.putExtra("id", mData.get(position).getProductId());
                 mContext.startActivity(intent);
             }
         });
@@ -72,6 +72,11 @@ public class RecyclerViewAdapterNotify extends RecyclerView.Adapter<RecyclerView
 
     public ArrayList<Notification> getData() {
         return mData;
+    }
+
+    public void restoreItem(Notification item, int position) {
+        mData.add(position, item);
+        notifyItemInserted(position);
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

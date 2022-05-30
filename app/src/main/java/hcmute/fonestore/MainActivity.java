@@ -14,7 +14,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import hcmute.fonestore.fragment.category.listFragment;
 import hcmute.fonestore.fragment.HomeFragment;
-import hcmute.fonestore.fragment.notification.notify1Fragment;
+import hcmute.fonestore.fragment.notification.NotificationFragment;
+import hcmute.fonestore.fragment.notification.NotificationFragment1;
 import hcmute.fonestore.fragment.user.UserFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,48 +29,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        bottomNav = findViewById(R.id.bottom_nav);
-//        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+        bottomNav = findViewById(R.id.bottom_nav);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 fragment = null;
                 newPosition = 0;
-                navigationView.getMenu().findItem(R.id.nav_home).setIcon(R.drawable.ic_home);
-                navigationView.getMenu().findItem(R.id.nav_category).setIcon(R.drawable.ic_category);
-                navigationView.getMenu().findItem(R.id.nav_utilities).setIcon(R.drawable.ic_utilities);
-                navigationView.getMenu().findItem(R.id.nav_notification).setIcon(R.drawable.ic_notification);
-                navigationView.getMenu().findItem(R.id.nav_profile).setIcon(R.drawable.ic_profile);
+                bottomNav.getMenu().findItem(R.id.nav_home).setIcon(R.drawable.ic_home);
+                bottomNav.getMenu().findItem(R.id.nav_category).setIcon(R.drawable.ic_category);
+                bottomNav.getMenu().findItem(R.id.nav_utilities).setIcon(R.drawable.ic_utilities);
+                bottomNav.getMenu().findItem(R.id.nav_notification).setIcon(R.drawable.ic_notification);
+                bottomNav.getMenu().findItem(R.id.nav_profile).setIcon(R.drawable.ic_profile);
 
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        navigationView.getMenu().findItem(R.id.nav_home).setIcon(R.drawable.ic_home_fill);
+                        bottomNav.getMenu().findItem(R.id.nav_home).setIcon(R.drawable.ic_home_fill);
                         fragment = new HomeFragment();
                         newPosition = 1;
                         break;
 
                     case R.id.nav_category:
-                        navigationView.getMenu().findItem(R.id.nav_category).setIcon(R.drawable.ic_category_fill);
+                        bottomNav.getMenu().findItem(R.id.nav_category).setIcon(R.drawable.ic_category_fill);
                         fragment = new listFragment();
                         newPosition = 2;
                         break;
 
                     case R.id.nav_utilities:
-                        navigationView.getMenu().findItem(R.id.nav_utilities).setIcon(R.drawable.ic_utilities_fill);
+                        bottomNav.getMenu().findItem(R.id.nav_utilities).setIcon(R.drawable.ic_utilities_fill);
                         fragment = new UtilitiesFragment();
                         newPosition = 3;
                         break;
 
                     case R.id.nav_notification:
-                        navigationView.getMenu().findItem(R.id.nav_notification).setIcon(R.drawable.ic_notifications_fill);
-                        fragment = new notify1Fragment();
+                        bottomNav.getMenu().findItem(R.id.nav_notification).setIcon(R.drawable.ic_notifications_fill);
+                        fragment = new NotificationFragment();
                         newPosition = 4;
                         break;
 
                     case R.id.nav_profile:
-                        navigationView.getMenu().findItem(R.id.nav_profile).setIcon(R.drawable.ic_profile_fill);
+                        bottomNav.getMenu().findItem(R.id.nav_profile).setIcon(R.drawable.ic_profile_fill);
                         fragment = new UserFragment();
                         newPosition = 5;
                         break;

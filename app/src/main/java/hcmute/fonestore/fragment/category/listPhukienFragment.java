@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.categoryActivity;
+import hcmute.fonestore.Activity.CategoryActivity;
 import hcmute.fonestore.Object.CategoryWithThumnail;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterIphone;
 
@@ -31,8 +31,8 @@ public class listPhukienFragment extends Fragment {
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), categoryActivity.class);
-                intent.putExtra("category", category.getText());
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                intent.putExtra("Category", category.getText());
                 startActivity(intent);
             }
         });

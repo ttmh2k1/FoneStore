@@ -14,32 +14,53 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.util.Calendar;
+
+import hcmute.fonestore.Animation.LoadingDialog;
 import hcmute.fonestore.R;
-import hcmute.fonestore.Activity.productActivity;
+import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Product;
+import hcmute.fonestore.RandomString;
 
-public class addProductActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity {
     ImageView btnSave, btnRefresh, btnBack;
     Button btnChoose;
     ImageView imageAdd;
     EditText edtProductName, edtPrice, edtProducer, edtBrand, edtOrigin, edtDescribe;
     int REQUEST_CODE_IMAGE = 1;
     BottomSheetDialog bottomDialog;
-    //    FirebaseAuth mAuth;
-//    DatabaseReference mData, delete;
-//    FirebaseStorage storage = FirebaseStorage.getInstance();
-    String id;
+
+    String userId;
     String productName, category;
     Product product;
-    hcmute.fonestore.Animation.loadingDialog loadingDialog;
+    LoadingDialog loadingDialog;
 
     Uri uri = null;
     int image = 0;
+
+    RandomString randomString = new RandomString();
+
+    FirebaseAuth mAuth;
+    DatabaseReference mData, delete;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +80,7 @@ public class addProductActivity extends AppCompatActivity {
         edtDescribe = findViewById(R.id.edt_describe);
         imageAdd.setBackgroundResource(R.drawable.img_no_image);
 
-//        getCurrentUser();
+        getCurrentUser();
 
         imageAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +98,9 @@ public class addProductActivity extends AppCompatActivity {
                         btnChoose.getText().toString().equals("") || edtProducer.getText().toString().equals("") ||
                         edtBrand.getText().toString().equals("") || edtOrigin.getText().toString().equals("") ||
                         edtDescribe.getText().toString().equals("") || image == 0) {
-                    Toast.makeText(addProductActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddProductActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                 } else {
+                    loadingDialog = new LoadingDialog(AddProductActivity.this);
                     loadingDialog.startLoadingDialog();
                     addProduct();
                 }
@@ -160,81 +182,87 @@ public class addProductActivity extends AppCompatActivity {
     }
 
     private void addProduct() {
-//        mData = FirebaseDatabase.getInstance().getReference();
-//        productName = String.valueOf(edtProductName.getText());
-//        category = String.valueOf(btnChoose.getText());
-//
-//        final StorageReference storageRef = storage.getReferenceFromUrl("gs://orchid-29b28.appspot.com");
-//        Calendar calendar = Calendar.getInstance();
-//        final StorageReference mountainsRef = storageRef.child("image" + calendar.getTimeInMillis() + ".png");
-//
-//        UploadTask uploadTask = mountainsRef.putFile(uri);
-//
-//        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-//            @Override
-//            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-//                if (!task.isSuccessful()) {
-//                }
-//                return mountainsRef.getDownloadUrl();
-//            }
-//        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Uri> task) {
-//                if (task.isSuccessful()) {
-//                    String url = task.getResult().toString();
-//
-//                    // tạo node trên Database
-//                    product product = new product(edtProductName.getText().toString(),
-//                            String.valueOf(url),
-//                            edtPrice.getText().toString() + " đ",
-//                            btnChoose.getText().toString(),
-//                            edtProducer.getText().toString(),
-//                            edtBrand.getText().toString(),
-//                            edtOrigin.getText().toString(),
-//                            edtDescribe.getText().toString(),
-//                            id);
-//                    mData.child("product").child(edtProductName.getText().toString()).setValue(product);
-//
-//                    loadingDialog.dismissDialog();
-//                    Toast.makeText(addProductActivity.this, "Tải lên thành công!", Toast.LENGTH_SHORT).show();
-//                    createBottomDialog();
-//                    bottomDialog.show();
-//                } else {
-//                    loadingDialog.dismissDialog();
-//                    Toast.makeText(addProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+        mData = FirebaseDatabase.getInstance().getReference();
+        productName = String.valueOf(edtProductName.getText());
+        category = String.valueOf(btnChoose.getText());
 
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Handle unsuccessful uploads
-//                Toast.makeText(addProductActivity.this, "Tải lên thất bại!", Toast.LENGTH_SHORT).show();
-//                loadingDialog.dismissDialog();
-//            }
-//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
-//                while (!urlTask.isSuccessful()) ;
-//                Uri downloadUrl = urlTask.getResult();
-//                Toast.makeText(addProductActivity.this, "Tải lên thành công!", Toast.LENGTH_SHORT).show();
-//
-//                // tạo node trên Database
-//                Product product = new product(edtProductName.getText().toString(),
-//                            String.valueOf(url),
-//                            edtPrice.getText().toString() + " đ",
-//                            btnChoose.getText().toString(),
-//                            edtProducer.getText().toString(),
-//                            edtBrand.getText().toString(),
-//                            edtOrigin.getText().toString(),
-//                            edtDescribe.getText().toString(),
-//                            id);
-//                mData.child("product").child(edtProductName.getText().toString()).setValue(product);
-//                loadingDialog.dismissDialog();
-//            }
-//        });
+        final StorageReference storageRef = storage.getReference();
+        Calendar calendar = Calendar.getInstance();
+        final StorageReference mountainsRef = storageRef.child("image" + calendar.getTimeInMillis() + ".png");
+
+        UploadTask uploadTask = mountainsRef.putFile(uri);
+
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                }
+                return mountainsRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    String url = task.getResult().toString();
+
+                    product = new Product(
+                            randomString.nextString(),
+                            edtProductName.getText().toString(),
+                            url,
+                            edtPrice.getText().toString() + " đ",
+                            btnChoose.getText().toString(),
+                            edtProducer.getText().toString(),
+                            edtBrand.getText().toString(),
+                            edtOrigin.getText().toString(),
+                            edtDescribe.getText().toString(),
+                            userId);
+
+                    mData.child("product").child(product.getId()).setValue(product).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AddProductActivity.this, "Tải lên thành công!", Toast.LENGTH_SHORT).show();
+                                createBottomDialog();
+                                bottomDialog.show();
+                            }
+                            loadingDialog.dismissDialog();
+                        }
+                    });
+                } else {
+                    Toast.makeText(AddProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+                    loadingDialog.dismissDialog();
+                }
+            }
+        });
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(AddProductActivity.this, "Tải lên thất bại!", Toast.LENGTH_SHORT).show();
+                loadingDialog.dismissDialog();
+            }
+        });/*.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!urlTask.isSuccessful()) ;
+                Uri downloadUrl = urlTask.getResult();
+                Toast.makeText(AddProductActivity.this, "Tải lên thành công!", Toast.LENGTH_SHORT).show();
+
+                // tạo node trên Database
+                Product product = new product(edtProductName.getText().toString(),
+                            String.valueOf(url),
+                            edtPrice.getText().toString() + " đ",
+                            btnChoose.getText().toString(),
+                            edtProducer.getText().toString(),
+                            edtBrand.getText().toString(),
+                            edtOrigin.getText().toString(),
+                            edtDescribe.getText().toString(),
+                        userId);
+                mData.child("product").child(edtProductName.getText().toString()).setValue(product);
+                loadingDialog.dismissDialog();
+            }
+        });*/
 
     }
 
@@ -258,15 +286,12 @@ public class addProductActivity extends AppCompatActivity {
             producer.setText(edtProducer.getText());
             price.setText(edtPrice.getText() + " đ");
             addImage.setImageURI(uri);
-            ;
 
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(addProductActivity.this, productActivity.class);
-
-                    intent.putExtra("Name", productName);
-                    // start the activity
+                    Intent intent = new Intent(AddProductActivity.this, ProductActivity.class);
+                    intent.putExtra("id", product.getId());
                     startActivity(intent);
                 }
             });
@@ -280,29 +305,39 @@ public class addProductActivity extends AppCompatActivity {
                 }
             });
 
-//            delete.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    StorageReference photoRef = storage.getReferenceFromUrl(product.getImage());
-//                    delete = FirebaseDatabase.getInstance().getReference().child("product").child(productName);
-//                    delete.removeValue();
-//
-//                    photoRef.delete();
-//                    bottomDialog.dismiss();
-//                    reset();
-//                    edtProductName.requestFocus();
-//                }
-//            });
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StorageReference photoRef = storage.getReferenceFromUrl(product.getImage());
+
+                    FirebaseDatabase.getInstance().getReference().child("product").child(product.getId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AddProductActivity.this, "Xóa sản phẩm thành công!", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                Toast.makeText(AddProductActivity.this, "Xóa sản phẩm thất bại!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                    photoRef.delete();
+                    bottomDialog.dismiss();
+                    reset();
+                    edtProductName.requestFocus();
+                }
+            });
             bottomDialog = new BottomSheetDialog(this);
             bottomDialog.setContentView(view);
         }
     }
 
-//    private void getCurrentUser() {
-//        mAuth = FirebaseAuth.getInstance();
-//        final FirebaseUser currentUser = mAuth.getCurrentUser();
-//        id = currentUser.getUid();
-//    }
+    private void getCurrentUser() {
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
+        userId = currentUser.getUid();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

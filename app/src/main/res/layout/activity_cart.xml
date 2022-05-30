@@ -5,7 +5,7 @@
     android:id="@+id/layout_cart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.cartActivity">
+    tools:context=".Activity.CartActivity">
 
     <ScrollView
         android:layout_width="match_parent"

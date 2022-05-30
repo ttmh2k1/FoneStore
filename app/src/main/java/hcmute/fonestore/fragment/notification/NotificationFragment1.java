@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import hcmute.fonestore.MainActivity;
 import hcmute.fonestore.R;
 
-public class notify1Fragment extends Fragment {
+public class NotificationFragment1 extends Fragment {
     Button next;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
