@@ -1,15 +1,18 @@
 package hcmute.fonestore.Object;
 
 public class User {
-    private String name, avatar, address, uid, email, joinTime;
+    private String name, avatar, address, uid, email, joinTime, role;
 
-    public User(String uid, String name, String avatar, String email, String address, String joinTime) {
+    public User() { }
+
+    public User(String uid, String name, String avatar, String email, String address, String joinTime, String role) {
         this.email = email;
         this.uid = uid;
         this.name = name;
         this.avatar = avatar;
         this.address = address;
         this.joinTime = joinTime;
+        this.role = role;
     }
 
     public String getUid() {
@@ -58,5 +61,13 @@ public class User {
 
     public void setJoinTime(String joinTime) {
         this.joinTime = joinTime;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

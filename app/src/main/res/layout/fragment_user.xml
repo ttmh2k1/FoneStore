@@ -106,6 +106,47 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_admin_account_mgr"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/ic_connect_fill"
+                android:drawableEnd="@drawable/ic_next_right"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|left"
+                android:paddingStart="10dp"
+                android:text="Quản lý tài khoản khách hàng"
+                android:textAllCaps="false"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/btn_admin_product_mgr"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/ic_connect_fill"
+                android:drawableEnd="@drawable/ic_next_right"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|left"
+                android:paddingStart="10dp"
+                android:text="Quản lý sản phẩm"
+                android:textAllCaps="false"
+                android:textSize="14sp" />
+            <Button
+                android:id="@+id/btn_admin_create_product"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/ic_post_fill"
+                android:drawableEnd="@drawable/ic_next_right"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical|left"
+                android:paddingStart="10dp"
+                android:text="Đăng bán sản phẩm"
+                android:textAllCaps="false"
+                android:textSize="14sp" />
+
+            <Button
                 android:id="@+id/user_connect"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -117,20 +158,6 @@
                 android:gravity="center_vertical|left"
                 android:paddingStart="10dp"
                 android:text="Liên kết tài khoản"
-                android:textAllCaps="false"
-                android:textSize="14sp" />
-
-            <Button
-                android:id="@+id/user_manage"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/ic_post_fill"
-                android:drawableEnd="@drawable/ic_next_right"
-                android:drawablePadding="5dp"
-                android:gravity="center_vertical|left"
-                android:paddingStart="10dp"
-                android:text="Đăng bán sản phẩm"
                 android:textAllCaps="false"
                 android:textSize="14sp" />
 
@@ -249,7 +276,7 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/user_seen"
+                android:id="@+id/btn_seen_product"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
@@ -277,22 +304,6 @@
                 android:textSize="14sp" />
 
             <Button
-                android:id="@+id/user_buylater"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:drawableStart="@drawable/ic_buylater_fill"
-                android:drawableEnd="@drawable/ic_next_right"
-                android:drawablePadding="5dp"
-                android:gravity="center_vertical|left"
-                android:paddingStart="10dp"
-                android:text="Sản phẩm đã đăng bán"
-                android:textAllCaps="false"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_favorite" />
-
-            <Button
                 android:id="@+id/user_setting"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -307,7 +318,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/user_buylater" />
+                app:layout_constraintTop_toBottomOf="@id/user_favorite" />
 
             <Button
                 android:id="@+id/user_support"

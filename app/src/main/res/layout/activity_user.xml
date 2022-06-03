@@ -58,7 +58,8 @@
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -111,6 +112,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_posted_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -120,12 +122,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kho hàng"
+                android:text="Sản phẩm đăng bán"
+                android:textAlignment="center"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_warehouse"
+                android:id="@+id/txt_posted_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -172,9 +175,9 @@
         <LinearLayout
             android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="15dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="35dp"
@@ -185,8 +188,8 @@
                 android:id="@+id/text_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Địa chỉ"
                 android:layout_marginStart="20dp"
+                android:text="Địa chỉ"
                 android:textColor="@color/blue_custom"
                 android:textSize="15sp" />
 

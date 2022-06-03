@@ -123,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 String url = task.getResult().toString();
                                 User user1 = new User(user.getUid(), name.getText().toString(), String.valueOf(url),
-                                        user.getEmail(), address.getText().toString(), dateFormat.format(date));
+                                        user.getEmail(), address.getText().toString(), dateFormat.format(date), "kh");
 
                                 mData.child("user").child(user.getUid()).setValue(user1);
 

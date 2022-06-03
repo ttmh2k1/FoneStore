@@ -133,28 +133,4 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:padding="10dp">
-
-        <TextView
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:text="Người bán:"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/guarantee_seller"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Người bán"
-            android:textColor="@color/black"
-            android:layout_marginStart="85dp"
-            android:textSize="15sp" />
-
-    </LinearLayout>
-
 </LinearLayout>

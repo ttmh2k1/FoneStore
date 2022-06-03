@@ -39,12 +39,17 @@ import java.util.Date;
 
 import hcmute.fonestore.Animation.LoadingDialog;
 import hcmute.fonestore.Object.Notification;
+import hcmute.fonestore.Object.Product;
+import hcmute.fonestore.Object.User;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Object.Comment;
 import hcmute.fonestore.RandomString;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterComment;
 
 public class ProductActivity extends AppCompatActivity implements View.OnClickListener {
+    private Product currentProduct;
+    private User currentUser;
+
     private TextView name;
     private TextView price;
     private TextView category;
@@ -53,21 +58,18 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private TextView origin;
     private TextView describe;
     private TextView guarantee;
+
     private TextView currentUserName;
     private ImageView img;
     ImageView back, like, cart, writeComment, currentUserImage;
     EditText edtComment;
     Button choosen, detailsDescribe;
     BottomSheetDialog bottomDialog1;
-    String sup, produceLocate, seller, userId, customerName, imageLink, imageUser;
     ArrayList<Comment> lstComment;
     RecyclerView recyclerView;
 
     String pid;
-
     DatabaseReference ref;
-    FirebaseAuth mAuth;
-
     RandomString randomString = new RandomString();
 
     @Override
@@ -115,25 +117,12 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private void createBottomDialog() {
         if (bottomDialog1 == null) {
             View view = LayoutInflater.from(this).inflate(R.layout.bottom_dialog, null);
-            final TextView txtSupplier, txtGuaranteeLocate, txtSeller;
+            final TextView txtSupplier, txtGuaranteeLocate;
             txtSupplier = view.findViewById(R.id.guarantee_sup);
             txtGuaranteeLocate = view.findViewById(R.id.guarantee_guaranteeLocate);
-            txtSeller = view.findViewById(R.id.guarantee_seller);
 
-            ref = FirebaseDatabase.getInstance().getReference().child("user").child(seller);
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    txtSeller.setText(dataSnapshot.child("name").getValue().toString());
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(ProductActivity.this, "Tải thất bại!", Toast.LENGTH_SHORT).show();
-                }
-            });
-            txtSupplier.setText(sup);
-            txtGuaranteeLocate.setText(produceLocate);
+            txtSupplier.setText(currentProduct.getBrand());
+            txtGuaranteeLocate.setText(currentProduct.getProducer());
 
             bottomDialog1 = new BottomSheetDialog(this);
             bottomDialog1.setContentView(view);
@@ -144,38 +133,33 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         if (edtComment.getText().equals("")) {
             Toast.makeText(ProductActivity.this, "Vui lòng nhập nhận xét!", Toast.LENGTH_SHORT).show();
         } else {
-            if (!seller.equals(userId)) {
-                ref = FirebaseDatabase.getInstance().getReference();
+            ref = FirebaseDatabase.getInstance().getReference();
 
-                Date date = Calendar.getInstance().getTime();
-                DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date date = Calendar.getInstance().getTime();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-                Comment comment = new Comment(randomString.nextString(), edtComment.getText().toString(), userId, customerName, imageUser);
-                ref.child("product").child(pid).child("comment").child(comment.getId()).setValue(comment);
-                edtComment.setText(null);
+            Comment comment = new Comment(randomString.nextString(), edtComment.getText().toString(), currentUser.getUid(), currentUser.getName(), currentUser.getAvatar());
+            ref.child("product").child(pid).child("comment").child(comment.getId()).setValue(comment);
+            edtComment.setText(null);
 
-                Notification notification = new Notification(dateFormat.format(date), pid, customerName, imageLink);
-                ref = FirebaseDatabase.getInstance().getReference();
-                ref.child("notifications").child(seller).child(randomString.nextString()).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(ProductActivity.this, "Đã gửi nhận xét!", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(ProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
-                        }
+            Notification notification = new Notification(dateFormat.format(date), pid, currentUser.getName(), currentProduct.getImage());
+            ref = FirebaseDatabase.getInstance().getReference();
+            ref.child("notifications").child(currentUser.getUid()).child(randomString.nextString()).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ProductActivity.this, "Đã gửi nhận xét!", Toast.LENGTH_SHORT).show();
                     }
-                });
-            }
-            else {
-                Toast.makeText(ProductActivity.this, "Bạn không thể nhận xét sản phẩm của mình!", Toast.LENGTH_SHORT).show();
-            }
-
+                    else {
+                        Toast.makeText(ProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 
     private void loadData() {
+        addToRecentlyViewed(pid);
         ref = FirebaseDatabase.getInstance().getReference().child("product").child(pid);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -184,29 +168,24 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                     finish();
                     Toast.makeText(ProductActivity.this, "Sản phẩm này đã bị xóa!", Toast.LENGTH_SHORT).show();
                 } else {
-                    name.setText(dataSnapshot.child("name").getValue().toString());
-                    price.setText(dataSnapshot.child("price").getValue().toString());
-                    category.setText(dataSnapshot.child("category").getValue().toString());
-                    producer.setText(dataSnapshot.child("producer").getValue().toString());
-                    brand.setText(dataSnapshot.child("brand").getValue().toString());
-                    origin.setText(dataSnapshot.child("origin").getValue().toString());
-                    describe.setText(dataSnapshot.child("describe").getValue().toString());
-                    Glide.with(ProductActivity.this).load(dataSnapshot.child("image").getValue().toString())
+                    currentProduct = dataSnapshot.getValue(Product.class);
+
+                    name.setText(currentProduct.getName());
+                    price.setText(currentProduct.getFormattedPrice());
+                    category.setText(currentProduct.getCategory());
+                    producer.setText(currentProduct.getProducer());
+                    brand.setText(currentProduct.getBrand());
+                    origin.setText(currentProduct.getOrigin());
+                    describe.setText(currentProduct.getDescribe());
+                    Glide.with(ProductActivity.this).load(currentProduct.getImage())
                             .placeholder(R.drawable.img_no_image).into(img);
 
-                    seller = dataSnapshot.child("seller").getValue().toString();
-                    sup = dataSnapshot.child("brand").getValue().toString();
-                    produceLocate = dataSnapshot.child("producer").getValue().toString();
-                    imageLink = dataSnapshot.child("image").getValue().toString();
-
-                    final String tempUrl = dataSnapshot.child("image").getValue().toString();
                     img.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             final Dialog dialog = new Dialog(ProductActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
                             PhotoView photoView = new PhotoView(ProductActivity.this);
-                            Glide.with(ProductActivity.this).load(tempUrl).into(photoView);
+                            Glide.with(ProductActivity.this).load(currentProduct.getImage()).into(photoView);
                             photoView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -260,7 +239,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("favourite").child(userId).addValueEventListener(new ValueEventListener() {
+        ref.child("favourite").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean existed = false;
@@ -273,7 +252,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 if (!existed) {
-                    ref.child("favourite").child(userId).child(randomString.nextString()).setValue(pid).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.child("favourite").child(currentUser.getUid()).child(randomString.nextString()).setValue(pid).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -305,7 +284,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("cart").child(userId).addValueEventListener(new ValueEventListener() {
+        ref.child("cart").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean existed = false;
@@ -318,7 +297,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 if (!existed) {
-                    ref.child("cart").child(userId).child(randomString.nextString()).setValue(pid).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.child("cart").child(currentUser.getUid()).child(randomString.nextString()).setValue(pid).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -345,19 +324,15 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getCurrentUser() {
-        mAuth = FirebaseAuth.getInstance();
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            userId = currentUser.getUid();
-
-            ref = FirebaseDatabase.getInstance().getReference().child("user").child(userId);
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fbUser != null) {
+            ref = FirebaseDatabase.getInstance().getReference().child("user").child(fbUser.getUid());
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    currentUserName.setText(dataSnapshot.child("name").getValue().toString());
-                    Glide.with(ProductActivity.this).load(dataSnapshot.child("avatar").getValue().toString()).placeholder(R.drawable.img_no_image).into(currentUserImage);
-                    customerName = dataSnapshot.child("name").getValue().toString();
-                    imageUser = dataSnapshot.child("avatar").getValue().toString();
+                    currentUser = dataSnapshot.getValue(User.class);
+                    currentUserName.setText(currentUser.getName());
+                    Glide.with(ProductActivity.this).load(currentUser.getAvatar()).placeholder(R.drawable.img_no_image).into(currentUserImage);
                 }
 
                 @Override
@@ -366,6 +341,62 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
         }
+    }
+
+    private void addToRecentlyViewed(String pid) {
+        FirebaseDatabase
+            .getInstance()
+            .getReference()
+            .child("seen")
+            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+            .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (ds.getValue(String.class).equals(pid))
+                            return;
+                    }
+
+                    if (snapshot.getChildrenCount() > 10) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            FirebaseDatabase
+                                .getInstance()
+                                .getReference()
+                                .child("seen")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child(ds.getKey())
+                                .removeValue()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        FirebaseDatabase
+                                                .getInstance()
+                                                .getReference()
+                                                .child("seen")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                                .child(randomString.nextString())
+                                                .setValue(pid);
+                                    }
+                                });
+                            break;
+                        }
+                    }
+                    else {
+                        FirebaseDatabase
+                                .getInstance()
+                                .getReference()
+                                .child("seen")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .child(randomString.nextString())
+                                .setValue(pid);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(ProductActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     @Override
@@ -379,7 +410,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 bottomDialog1.show();
                 break;
             case R.id.btn_product_like:
-                if (seller.equals(userId))
+                if (currentProduct.getCreator().equals(currentUser.getUid()))
                     Toast.makeText(ProductActivity.this, "Đây là sản phẩm bạn đăng bán", Toast.LENGTH_SHORT).show();
                 else addLike();
                 break;
@@ -388,9 +419,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.btn_choosen:
-                if (seller.equals(userId))
+                if (currentProduct.getCreator().equals(currentUser.getUid()))
                     Toast.makeText(ProductActivity.this, "Đây là sản phẩm bạn đăng bán", Toast.LENGTH_SHORT).show();
-                else addToCart();
+                else
+                    addToCart();
                 break;
             case R.id.btn_post:
                 createComment();

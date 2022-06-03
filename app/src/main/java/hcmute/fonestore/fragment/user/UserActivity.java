@@ -1,7 +1,9 @@
 package hcmute.fonestore.fragment.user;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +21,12 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import hcmute.fonestore.R;
+import hcmute.fonestore.fragment.user.admin.ProductMgrActivity;
 
 public class UserActivity extends AppCompatActivity {
 
-    TextView email, address, date, id, cart, favourite, totalProduct, name;
+    TextView email, address, date, id, cart, favourite, numPostedProduct, name;
+    LinearLayout layout_posted_product;
     ImageView avatar;
     FirebaseAuth mAuth;
     DatabaseReference ref;
@@ -36,12 +40,13 @@ public class UserActivity extends AppCompatActivity {
         name = findViewById(R.id.text_name);
         cart = findViewById(R.id.text_cart);
         favourite = findViewById(R.id.text_favorite);
-        totalProduct = findViewById(R.id.text_warehouse);
+        numPostedProduct = findViewById(R.id.txt_posted_product);
         email = findViewById(R.id.text_email);
         address = findViewById(R.id.text_address);
         date = findViewById(R.id.text_date);
         id = findViewById(R.id.text_id);
         avatar = findViewById(R.id.avatar);
+        layout_posted_product = findViewById(R.id.layout_posted_product);
 
         loadData();
     }
@@ -49,25 +54,6 @@ public class UserActivity extends AppCompatActivity {
     private void loadData() {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        /*ref = FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid());
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                name.setText(dataSnapshot.child("name").getValue().toString());
-                email.setText(dataSnapshot.child("email").getValue().toString());
-                date.setText(dataSnapshot.child("date").getValue().toString());
-                id.setText(dataSnapshot.child("uid").getValue().toString());
-
-                Glide.with(UserActivity.this).load(dataSnapshot.child("avatar").getValue().toString())
-                        .placeholder(R.drawable.img_no_image).into(avatar);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserActivity.this, "Tải lên thất bại!", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
         ref = FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid());
         ref.addValueEventListener(new ValueEventListener() {
@@ -85,7 +71,7 @@ public class UserActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(UserActivity.this, "Tải lên thất bại!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,6 +88,7 @@ public class UserActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,22 +105,39 @@ public class UserActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
 
-        query = FirebaseDatabase.getInstance().getReference().child("product").orderByChild("seller").equalTo(currentUser.getUid());
-        query.addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid()).child("role").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int i = 0;
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    i++;
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue(String.class).equals("admin")) {
+                    query = FirebaseDatabase.getInstance().getReference().child("product").orderByChild("creator").equalTo(currentUser.getUid());
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            int i = 0;
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                i++;
+                            }
+                            numPostedProduct.setText(Integer.toString(i));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-                totalProduct.setText(Integer.toString(i));
+                else {
+                    layout_posted_product.setVisibility(View.GONE);
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UserActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }

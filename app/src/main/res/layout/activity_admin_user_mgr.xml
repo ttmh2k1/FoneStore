@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="30dp"
-                    android:text="Sản phẩm đã đăng bán"
+                    android:text="Quản lý tài khoản khách hàng"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
@@ -44,7 +44,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_bought"
+                android:id="@+id/recyclerView_user_mgr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp" />
@@ -52,7 +52,7 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/layoutdb_noProduct"
+        android:id="@+id/layout_no_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -72,22 +72,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Bạn chưa có sản phẩm nào trong giỏ"
+            android:text="Hiện tại không có tài khoản để quản lý!"
             android:textColor="@color/blue_custom"
             android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/bought_continue"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_selector"
-            android:text="Tiếp tục mua sắm"
-            android:textColor="@color/white" />
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/loading_view_bought"
+        android:id="@+id/loading_view_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

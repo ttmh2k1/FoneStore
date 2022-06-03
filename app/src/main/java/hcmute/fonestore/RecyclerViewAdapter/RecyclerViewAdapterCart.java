@@ -21,12 +21,12 @@ import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Product;
 
 public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAdapterCart.MyViewHolder> {
-    private Context mContext;
-    private ArrayList<Product> mData;
+    private Context context;
+    private ArrayList<Product> data;
 
-    public RecyclerViewAdapterCart(Context mContext, ArrayList<Product> mData) {
-        this.mContext = mContext;
-        this.mData = mData;
+    public RecyclerViewAdapterCart(Context context, ArrayList<Product> data) {
+        this.context = context;
+        this.data = data;
     }
 
     @Override
@@ -38,38 +38,40 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.name.setText(mData.get(position).getName());
-        holder.producer.setText("Cung cấp bởi " + mData.get(position).getProducer());
-        holder.price.setText(mData.get(position).getPrice());
-        Glide.with(mContext).load(mData.get(position).getImage()).placeholder(R.drawable.img_no_image).into(holder.image);
+        Product p = data.get(position);
+
+        holder.name.setText(p.getName());
+        holder.producer.setText("Cung cấp bởi " + p.getProducer());
+        holder.price.setText(p.getFormattedPrice());
+        Glide.with(context).load(p.getImage()).placeholder(R.drawable.img_no_image).into(holder.image);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ProductActivity.class);
-                intent.putExtra("id", mData.get(position).getId());
-                mContext.startActivity(intent);
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("id", p.getId());
+                context.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return data.size();
     }
 
     public void removeItem(int position) {
-        mData.remove(position);
+        data.remove(position);
         notifyItemRemoved(position);
     }
 
     public void restoreItem(Product item, int position) {
-        mData.add(position, item);
+        data.add(position, item);
         notifyItemInserted(position);
     }
 
     public ArrayList<Product> getData() {
-        return mData;
+        return data;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView producer, name, price;

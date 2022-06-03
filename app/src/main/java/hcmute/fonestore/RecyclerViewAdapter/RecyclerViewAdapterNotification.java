@@ -16,9 +16,9 @@ import java.util.List;
 
 import hcmute.fonestore.R;
 import hcmute.fonestore.fragment.notification.NotificationFragment;
-import hcmute.fonestore.fragment.notification.NotificationFragment1;
-import hcmute.fonestore.Object.CategoryWithThumnail;
 import hcmute.fonestore.fragment.notification.NotificationFragment2;
+import hcmute.fonestore.Object.CategoryWithThumnail;
+import hcmute.fonestore.fragment.notification.NotificationFragment1;
 
 
 public class RecyclerViewAdapterNotification extends RecyclerView.Adapter<RecyclerViewAdapterNotification.MyViewHolder> {
@@ -57,7 +57,7 @@ public class RecyclerViewAdapterNotification extends RecyclerView.Adapter<Recycl
                 holder.cardView.setBackgroundResource(R.color.white);
                 switch (position) {
                     case 0:
-                        newFragment = new NotificationFragment2();
+                        newFragment = new NotificationFragment1();
                         transaction = mContext.getFragmentManager().beginTransaction();
 
                         transaction.replace(R.id.notification_host_fragment, newFragment);
@@ -67,7 +67,7 @@ public class RecyclerViewAdapterNotification extends RecyclerView.Adapter<Recycl
                     case 1:
                     case 2:
                     case 3:
-                        newFragment = new NotificationFragment1();
+                        newFragment = new NotificationFragment2();
                         transaction = mContext.getFragmentManager().beginTransaction();
 
                         transaction.replace(R.id.notification_host_fragment, newFragment);
