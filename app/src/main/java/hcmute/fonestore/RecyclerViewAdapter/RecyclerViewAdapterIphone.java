@@ -46,7 +46,7 @@ public class RecyclerViewAdapterIphone extends RecyclerView.Adapter<RecyclerView
                 Intent intent = new Intent(mContext, ProductActivity.class);
 
                 // passing data to the book activity
-                intent.putExtra("Name",mData.get(position).getTitle());
+                intent.putExtra("id",mData.get(position).getTitle());
                 // start the activity
                 mContext.startActivity(intent);
             }

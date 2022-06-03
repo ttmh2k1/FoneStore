@@ -40,7 +40,7 @@ public class NotificationFragment extends Fragment {
             }
         });
 
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.notification_host_fragment, new NotificationFragment2()).commit();
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.notification_host_fragment, new NotificationFragment1()).commit();
 
         lstBtn = new ArrayList<>();
         lstBtn.add(new CategoryWithThumnail(null, R.drawable.ic_home_fill));
@@ -50,7 +50,7 @@ public class NotificationFragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapterNotification myAdapter = new RecyclerViewAdapterNotification(this,lstBtn);
+        RecyclerViewAdapterNotification myAdapter = new RecyclerViewAdapterNotification(this, lstBtn);
         recyclerView.setAdapter(myAdapter);
 
         return root;

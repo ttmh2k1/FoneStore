@@ -15,7 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import hcmute.fonestore.fragment.category.listFragment;
 import hcmute.fonestore.fragment.HomeFragment;
 import hcmute.fonestore.fragment.notification.NotificationFragment;
-import hcmute.fonestore.fragment.notification.NotificationFragment1;
 import hcmute.fonestore.fragment.user.UserFragment;
 
 public class MainActivity extends AppCompatActivity {

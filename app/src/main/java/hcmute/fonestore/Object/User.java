@@ -3,7 +3,7 @@ package hcmute.fonestore.Object;
 public class User {
     private String name, avatar, address, uid, email, joinTime, role;
 
-    public User(){}
+    public User() { }
 
     public User(String uid, String name, String avatar, String email, String address, String joinTime, String role) {
         this.email = email;

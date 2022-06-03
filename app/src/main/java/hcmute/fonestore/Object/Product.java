@@ -6,13 +6,13 @@ public class Product {
     @Exclude
     private String id;
 
-    private String name, image, category, producer, brand, origin, describe;
-    private int price;
+    private String name, image, category, producer, brand, origin, describe, creator, active;
+    private Long price;
 
     public Product() {
     }
 
-    public Product(String name, String image, int price, String category, String producer, String brand, String origin, String describe) {
+    public Product(String name, String image, Long price, String category, String producer, String brand, String origin, String describe, String creator, String active) {
         this.name = name;
         this.image = image;
         this.category = category;
@@ -21,9 +21,11 @@ public class Product {
         this.origin = origin;
         this.describe = describe;
         this.price = price;
+        this.creator = creator;
+        this.active = active;
     }
 
-    public Product(String id, String name, String image, int price, String category, String producer, String brand, String origin, String describe, String seller) {
+    public Product(String id, String name, String image, Long price, String category, String producer, String brand, String origin, String describe, String creator, String active) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -33,6 +35,8 @@ public class Product {
         this.origin = origin;
         this.describe = describe;
         this.price = price;
+        this.creator = creator;
+        this.active = active;
     }
 
     public String getId() {
@@ -99,11 +103,31 @@ public class Product {
         this.describe = describe;
     }
 
-    public int getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
+
+    public String getFormattedPrice() {
+        return String.format("%,d vnđ", price);
     }
 }

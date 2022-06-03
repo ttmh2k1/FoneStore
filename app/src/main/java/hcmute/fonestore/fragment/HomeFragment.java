@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Timer timer;
     final long DELAY_MS = 1500;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+    static final int LIMIT_PRODUCT = 5;
 
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
@@ -242,10 +243,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstIphone = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+                    p.setId(dataSnapshot1.getKey());
                     lstIphone.add(p);
                 }
-                RecyclerViewAdapter myAdapterIphone = new RecyclerViewAdapter(getContext(), lstIphone);
-                recyclerViewIphone.setAdapter(myAdapterIphone);
+                if (lstIphone.size() < LIMIT_PRODUCT + 1) {
+                    recyclerViewIphone.setAdapter(new RecyclerViewAdapter(getContext(), lstIphone));
+                }
+                else {
+                    Collections.shuffle(lstIphone);
+                    recyclerViewIphone.setAdapter(new RecyclerViewAdapter(getContext(), lstIphone.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override
@@ -264,10 +271,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstSamsung = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+                    p.setId(dataSnapshot1.getKey());
                     lstSamsung.add(p);
                 }
-                RecyclerViewAdapter myAdapterQuanao = new RecyclerViewAdapter(getContext(), lstSamsung);
-                recyclerViewSamsung.setAdapter(myAdapterQuanao);
+
+                if (lstSamsung.size() < LIMIT_PRODUCT + 1) {
+                    recyclerViewSamsung.setAdapter(new RecyclerViewAdapter(getContext(), lstSamsung));
+                }
+                else {
+                    Collections.shuffle(lstSamsung);
+                    recyclerViewSamsung.setAdapter(new RecyclerViewAdapter(getContext(), lstSamsung.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override
@@ -286,11 +300,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstOppo = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+                    p.setId(dataSnapshot1.getKey());
                     if (p.getCategory().equals("Điện thoại Oppo"))
                         lstOppo.add(p);
                 }
-                RecyclerViewAdapter myAdapterOppo = new RecyclerViewAdapter(getContext(), lstOppo);
-                recyclerViewOppo.setAdapter(myAdapterOppo);
+
+                if (lstOppo.size() < LIMIT_PRODUCT + 1) {
+                    recyclerViewOppo.setAdapter(new RecyclerViewAdapter(getContext(), lstOppo));
+                }
+                else {
+                    Collections.shuffle(lstOppo);
+                    recyclerViewOppo.setAdapter(new RecyclerViewAdapter(getContext(), lstOppo.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override
@@ -309,11 +330,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstVivo = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+                    p.setId(dataSnapshot1.getKey());
                     if (p.getCategory().equals("Điện thoại Vivo"))
                         lstVivo.add(p);
                 }
-                RecyclerViewAdapter myAdapterVivo = new RecyclerViewAdapter(getContext(), lstVivo);
-                recyclerViewVivo.setAdapter(myAdapterVivo);
+
+                if (lstVivo.size() < LIMIT_PRODUCT + 1) {
+                    recyclerViewVivo.setAdapter(new RecyclerViewAdapter(getContext(), lstVivo));
+                }
+                else {
+                    Collections.shuffle(lstVivo);
+                    recyclerViewVivo.setAdapter(new RecyclerViewAdapter(getContext(), lstVivo.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override
@@ -332,11 +360,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstXiaomi = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+                    p.setId(dataSnapshot1.getKey());
                     if (p.getCategory().equals("Điện thoại Xiaomi"))
                         lstXiaomi.add(p);
                 }
-                RecyclerViewAdapter myAdapterXiaomi = new RecyclerViewAdapter(getContext(), lstXiaomi);
-                recyclerViewXiaomi.setAdapter(myAdapterXiaomi);
+
+                if (lstXiaomi.size() < LIMIT_PRODUCT + 1) {
+                    recyclerViewXiaomi.setAdapter(new RecyclerViewAdapter(getContext(), lstXiaomi));
+                }
+                else {
+                    Collections.shuffle(lstXiaomi);
+                    recyclerViewXiaomi.setAdapter(new RecyclerViewAdapter(getContext(), lstXiaomi.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override
@@ -361,9 +396,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     layoutFavorite.setVisibility(GONE);
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    if (lstFavourite.size() >= LIMIT_PRODUCT)
+                        break;
                     FirebaseDatabase.getInstance().getReference().child("product").child(dataSnapshot1.getValue().toString()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (lstFavourite.size() >= LIMIT_PRODUCT)
+                                return;
                             Product p = snapshot.getValue(Product.class);
                             p.setId(dataSnapshot1.getValue().toString());
                             lstFavourite.add(p);

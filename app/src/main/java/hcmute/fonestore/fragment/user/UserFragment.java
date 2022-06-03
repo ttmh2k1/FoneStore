@@ -22,15 +22,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import hcmute.fonestore.Activity.ChatActivity;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Activity.FavoriteActivity;
 import hcmute.fonestore.Activity.LoginActivity;
+import hcmute.fonestore.fragment.user.admin.AddProductActivity;
+import hcmute.fonestore.fragment.user.admin.ProductMgrActivity;
+import hcmute.fonestore.fragment.user.admin.UserMgrActivity;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView cart;
-    Button btnManage, btnFavorite, btnLogout, btnBuylater, btnAccount, aboutus, setting, chat;
+    Button btnFavorite, btnLogout, btnAccount, aboutus, setting, btnSeenProduct;
+    Button btnAdminAccountMgr, btnAdminProductMgr, btnAdminCreateProduct;
     TextView email, name, address;
     ImageView img;
 
@@ -42,11 +45,15 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_user, container, false);
 
-        btnBuylater = root.findViewById(R.id.user_buylater);
+        btnSeenProduct = root.findViewById(R.id.btn_seen_product);
         btnFavorite = root.findViewById(R.id.user_favorite);
-        btnManage = root.findViewById(R.id.user_manage);
         btnAccount = root.findViewById(R.id.user_infoAccount);
         btnLogout = root.findViewById(R.id.user_logout);
+
+        btnAdminAccountMgr = root.findViewById(R.id.btn_admin_account_mgr);
+        btnAdminProductMgr = root.findViewById(R.id.btn_admin_product_mgr);
+        btnAdminCreateProduct = root.findViewById(R.id.btn_admin_create_product);
+
         cart = root.findViewById(R.id.btn_user_cart);
         email = root.findViewById(R.id.user_email);
         name = root.findViewById(R.id.user_name);
@@ -54,19 +61,19 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         img = root.findViewById(R.id.user_img1);
         aboutus = root.findViewById(R.id.user_support);
         setting = root.findViewById(R.id.user_setting);
-        chat = root.findViewById(R.id.user_chat);
 
         loadData();
 
         cart.setOnClickListener(this);
-        btnManage.setOnClickListener(this);
         btnFavorite.setOnClickListener(this);
-        btnBuylater.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
         btnAccount.setOnClickListener(this);
         aboutus.setOnClickListener(this);
         setting.setOnClickListener(this);
-        chat.setOnClickListener(this);
+        btnAdminAccountMgr.setOnClickListener(this);
+        btnAdminProductMgr.setOnClickListener(this);
+        btnAdminCreateProduct.setOnClickListener(this);
+        btnSeenProduct.setOnClickListener(this);
 
         return root;
     }
@@ -75,11 +82,26 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid()).child("role").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue(String.class).equals("kh")) {
+                    btnAdminAccountMgr.setVisibility(View.GONE);
+                    btnAdminProductMgr.setVisibility(View.GONE);
+                    btnAdminCreateProduct.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         ref = FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid());
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Setting values
                 name.setText(dataSnapshot.child("name").getValue().toString());
                 email.setText(dataSnapshot.child("email").getValue().toString());
                 address.setText(dataSnapshot.child("address").getValue().toString());
@@ -90,7 +112,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getActivity(), "Tải lên thất bại!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -102,16 +124,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), CartActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.user_manage:
-                intent = new Intent(getActivity(), AddProductActivity.class);
-                startActivity(intent);
-                break;
             case R.id.user_favorite:
                 intent = new Intent(getActivity(), FavoriteActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.user_buylater:
-                intent = new Intent(getActivity(), BoughtActivity.class);
                 startActivity(intent);
                 break;
             case R.id.user_logout:
@@ -127,12 +141,24 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), InfoActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.btn_seen_product:
+                intent = new Intent(getActivity(), SeenProductActivity.class);
+                startActivity(intent);
+                break;
             case R.id.user_setting:
                 intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.user_chat:
-                intent = new Intent(getActivity(), ChatActivity.class);
+            case R.id.btn_admin_account_mgr:
+                intent = new Intent(getActivity(), UserMgrActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_admin_product_mgr:
+                intent = new Intent(getActivity(), ProductMgrActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_admin_create_product:
+                intent = new Intent(getActivity(), AddProductActivity.class);
                 startActivity(intent);
                 break;
         }

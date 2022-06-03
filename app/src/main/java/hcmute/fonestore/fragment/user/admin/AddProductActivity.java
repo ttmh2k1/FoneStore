@@ -209,7 +209,7 @@ public class AddProductActivity extends AppCompatActivity {
                             randomString.nextString(),
                             edtProductName.getText().toString(),
                             url,
-                            Integer.parseInt(edtPrice.getText().toString()),
+                            edtPrice.getText().toString() + " đ",
                             btnChoose.getText().toString(),
                             edtProducer.getText().toString(),
                             edtBrand.getText().toString(),
