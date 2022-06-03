@@ -13,6 +13,6 @@ public class FirebaseService extends FirebaseMessagingService {
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String tokenRefresh = FirebaseInstanceI
+//        String tokenRefresh = FirebaseInstanceI
     }
 }

@@ -1,4 +1,4 @@
-package hcmute.fonestore.fragment.user;
+package hcmute.fonestore.fragment.user.admin;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,16 +18,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -35,12 +38,15 @@ import com.google.firebase.storage.UploadTask;
 import java.util.Calendar;
 
 import hcmute.fonestore.Animation.LoadingDialog;
+import hcmute.fonestore.Object.User;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.RandomString;
 
 public class AddProductActivity extends AppCompatActivity {
+    User currentUser;
+
     ImageView btnSave, btnRefresh, btnBack;
     Button btnChoose;
     ImageView imageAdd;
@@ -48,7 +54,6 @@ public class AddProductActivity extends AppCompatActivity {
     int REQUEST_CODE_IMAGE = 1;
     BottomSheetDialog bottomDialog;
 
-    String userId;
     String productName, category;
     Product product;
     LoadingDialog loadingDialog;
@@ -209,13 +214,14 @@ public class AddProductActivity extends AppCompatActivity {
                             randomString.nextString(),
                             edtProductName.getText().toString(),
                             url,
-                            edtPrice.getText().toString() + " đ",
+                            Long.valueOf(edtPrice.getText().toString()),
                             btnChoose.getText().toString(),
                             edtProducer.getText().toString(),
                             edtBrand.getText().toString(),
                             edtOrigin.getText().toString(),
                             edtDescribe.getText().toString(),
-                            userId);
+                            currentUser.getEmail(),
+                            "1");
 
                     mData.child("product").child(product.getId()).setValue(product).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -334,9 +340,20 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void getCurrentUser() {
-        mAuth = FirebaseAuth.getInstance();
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
-        userId = currentUser.getUid();
+        FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fbUser != null) {
+            FirebaseDatabase.getInstance().getReference().child("user").child(fbUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    currentUser = dataSnapshot.getValue(User.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(AddProductActivity.this, "Opsss.... Something is wrong", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override

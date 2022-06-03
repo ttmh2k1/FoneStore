@@ -37,6 +37,8 @@
         <activity android:name=".fragment.user.SeenProductActivity" />
         <activity android:name=".fragment.user.admin.UserMgrActivity" />
         <activity android:name=".fragment.user.admin.ProductMgrActivity" />
+        <activity android:name=".Activity.ChatActivity" />
+        <activity android:name=".Activity.DetailChatActivity" />
     </application>
 
 </manifest>

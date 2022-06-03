@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import hcmute.fonestore.Activity.ChatActivity;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Activity.FavoriteActivity;
@@ -32,7 +33,7 @@ import hcmute.fonestore.fragment.user.admin.UserMgrActivity;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView cart;
-    Button btnFavorite, btnLogout, btnAccount, aboutus, setting, btnSeenProduct;
+    Button btnFavorite, btnLogout, btnAccount, aboutus, setting, btnSeenProduct, btnChat;
     Button btnAdminAccountMgr, btnAdminProductMgr, btnAdminCreateProduct;
     TextView email, name, address;
     ImageView img;
@@ -61,6 +62,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         img = root.findViewById(R.id.user_img1);
         aboutus = root.findViewById(R.id.user_support);
         setting = root.findViewById(R.id.user_setting);
+        btnChat = root.findViewById(R.id.user_chat);
 
         loadData();
 
@@ -74,6 +76,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnAdminProductMgr.setOnClickListener(this);
         btnAdminCreateProduct.setOnClickListener(this);
         btnSeenProduct.setOnClickListener(this);
+        btnChat.setOnClickListener(this);
 
         return root;
     }
@@ -159,6 +162,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_admin_create_product:
                 intent = new Intent(getActivity(), AddProductActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.user_chat:
+                intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
                 break;
         }
