@@ -10,11 +10,13 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:background="@color/colorPrimary">
 
         <ImageView
             android:id="@+id/user_img1"
             android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@drawable/img_no_image"
             android:scaleType="fitXY" />
 
