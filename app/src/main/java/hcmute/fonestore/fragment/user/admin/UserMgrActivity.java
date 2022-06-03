@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class UserMgrActivity extends AppCompatActivity {
     RecyclerView recyclerView_user_mgr;
     LinearLayout layout_no_account;
     ProgressBar loading_view_account;
+    ImageView btn_back;
     ArrayList<User> lstUser;
 
     @Override
@@ -33,12 +35,20 @@ public class UserMgrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_user_mgr);
 
+        btn_back = findViewById(R.id.btn_back);
         recyclerView_user_mgr = findViewById(R.id.recyclerView_user_mgr);
         layout_no_account = findViewById(R.id.layout_no_account);
         loading_view_account = findViewById(R.id.loading_view_account);
         lstUser = new ArrayList<>();
 
         loadData();
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void loadData() {

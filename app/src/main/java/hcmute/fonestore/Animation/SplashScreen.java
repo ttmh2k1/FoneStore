@@ -25,7 +25,6 @@ public class SplashScreen extends AppCompatActivity {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 } finally {
-//                    startActivity(new Intent(SplashScreen.this, LoginActivity.class));
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     if (auth.getCurrentUser() == null)
                         startActivity(new Intent(SplashScreen.this, LoginActivity.class));

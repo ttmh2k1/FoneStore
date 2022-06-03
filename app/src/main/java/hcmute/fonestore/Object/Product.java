@@ -128,6 +128,6 @@ public class Product {
     }
 
     public String getFormattedPrice() {
-        return String.format("%,d vnđ", price);
+        return String.format("%,d VNĐ", price);
     }
 }

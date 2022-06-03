@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hcmute.fonestore">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,6 +12,12 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoneStore">
+
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".Animation.SplashScreen"
             android:exported="true">
@@ -30,6 +37,7 @@
         <activity android:name=".Activity.ProductDetailActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.SearchActivity" />
+        <activity android:name=".Activity.ForgotPasswordActivity" />
         <activity android:name=".fragment.user.admin.AddProductActivity" />
         <activity android:name=".fragment.user.InfoActivity" />
         <activity android:name=".fragment.user.SettingsActivity" />

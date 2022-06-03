@@ -1,5 +1,7 @@
 package hcmute.fonestore;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -81,6 +83,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             loadFragment(new listFragment(), 2);
             bottomNav.setSelectedItemId(R.id.nav_category);
+        }
+
+        Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(notificationService);
+        } else {
+            startService(notificationService);
         }
     }
 

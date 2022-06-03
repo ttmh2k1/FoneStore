@@ -82,7 +82,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid()).child("role").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid()).child("role").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue(String.class).equals("kh")) {
@@ -99,7 +99,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         });
 
         ref = FirebaseDatabase.getInstance().getReference().child("user").child(currentUser.getUid());
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 name.setText(dataSnapshot.child("name").getValue().toString());

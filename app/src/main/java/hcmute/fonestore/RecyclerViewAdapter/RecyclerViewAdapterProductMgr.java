@@ -40,13 +40,72 @@ public class RecyclerViewAdapterProductMgr extends RecyclerView.Adapter<Recycler
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_product_mgr, parent, false);
-        return new MyViewHolder(itemView, context);
+        return new MyViewHolder(itemView);
     }
 
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.setProduct(data.get(position));
+        Product product = data.get(position);
+
+        holder.txtProductName.setText(product.getName());
+        holder.txtProductBrand.setText("Thương hiệu: " + product.getBrand());
+        holder.txtProductCategory.setText("Loại: " + product.getCategory());
+        holder.txtProductCreator.setText("Người tạo: " + product.getCreator());
+        holder.txtProductPrice.setText("Giá: " + product.getFormattedPrice());
+
+        Glide.with(context).load(product.getImage()).placeholder(R.drawable.img_no_image).into(holder.productImage);
+
+        if (product.getActive().equals("1"))
+            holder.btnActivate.setBackgroundColor(Color.GREEN);
+        else
+            holder.btnActivate.setBackgroundColor(Color.RED);
+
+        holder.btnActivate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (product.getActive().equals("1")) {
+                    product.setActive("0");
+
+                    FirebaseDatabase.getInstance().getReference().child("product").child(product.getId()).child("active").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(context, "Vô hiệu hóa sản phẩm thành công!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            product.setActive("1");
+                            Toast.makeText(context, "Opsss.... Something is wrong (" + e.getMessage() + ")", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                else {
+                    product.setActive("1");
+                    FirebaseDatabase.getInstance().getReference().child("product").child(product.getId()).child("active").setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(context, "Kích hoạt sản phẩm thành công!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            product.setActive("0");
+                            Toast.makeText(context, "Opsss.... Something is wrong (" + e.getMessage() + ")", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        holder.product_card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductActivity.class);
+                intent.putExtra("id", product.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -68,16 +127,13 @@ public class RecyclerViewAdapterProductMgr extends RecyclerView.Adapter<Recycler
         return data;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        Product product;
-        Context context;
         TextView txtProductName, txtProductBrand, txtProductCategory, txtProductCreator, txtProductPrice;
         Button btnActivate;
         ImageView productImage;
         CardView product_card;
 
-        public MyViewHolder(View itemView, Context context) {
+        public MyViewHolder(View itemView) {
             super(itemView);
-            this.context = context;
 
             product_card = itemView.findViewById(R.id.product_card);
             productImage = itemView.findViewById(R.id.product_image);
@@ -88,74 +144,6 @@ public class RecyclerViewAdapterProductMgr extends RecyclerView.Adapter<Recycler
             txtProductPrice = itemView.findViewById(R.id.product_price);
 
             btnActivate = itemView.findViewById(R.id.btn_activate);
-        }
-
-        public void setProduct(Product product) {
-            if (this.product != null)
-                return;
-
-            this.product = product;
-
-            txtProductName.setText(product.getName());
-            txtProductBrand.setText("Thương hiệu: " + product.getBrand());
-            txtProductCategory.setText("Loại: " + product.getCategory());
-            txtProductCreator.setText("Người tạo: " + product.getCreator());
-            txtProductPrice.setText("Giá: " + product.getFormattedPrice());
-
-            Glide.with(context).load(product.getImage()).placeholder(R.drawable.img_no_image).into(productImage);
-
-            if (product.getActive().equals("1"))
-                btnActivate.setBackgroundColor(Color.GREEN);
-            else
-                btnActivate.setBackgroundColor(Color.RED);
-
-            btnActivate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (product.getActive().equals("1")) {
-                        FirebaseDatabase.getInstance().getReference().child("product").child(product.getId()).child("active").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(context, "Vô hiệu hóa sản phẩm thành công!", Toast.LENGTH_SHORT).show();
-                                product.setActive("0");
-                                btnActivate.setBackgroundColor(Color.RED);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Opsss.... Something is wrong (" + e.getMessage() + ")", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    }
-                    else {
-
-
-                        FirebaseDatabase.getInstance().getReference().child("product").child(product.getId()).child("active").setValue("1").addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(context, "Kích hoạt sản phẩm thành công!", Toast.LENGTH_SHORT).show();
-                                product.setActive("1");
-                                btnActivate.setBackgroundColor(Color.GREEN);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Opsss.... Something is wrong (" + e.getMessage() + ")", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-            });
-
-            product_card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, ProductActivity.class);
-                    intent.putExtra("id", product.getId());
-                    context.startActivity(intent);
-                }
-            });
         }
     }
 }

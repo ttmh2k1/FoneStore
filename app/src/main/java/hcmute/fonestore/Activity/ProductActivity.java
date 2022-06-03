@@ -36,6 +36,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import hcmute.fonestore.Animation.LoadingDialog;
 import hcmute.fonestore.Object.Notification;
@@ -68,6 +71,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     ArrayList<Comment> lstComment;
     RecyclerView recyclerView;
 
+    ArrayList<String> favUid;
+
     String pid;
     DatabaseReference ref;
     RandomString randomString = new RandomString();
@@ -97,13 +102,14 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         currentUserImage = findViewById(R.id.currentuser_comment);
         detailsDescribe = findViewById(R.id.details_describe);
 
-        // Recieve data
+        // Receive data
         Intent intent = getIntent();
         pid = intent.getExtras().getString("id");
 
         loadData();
         loadComment();
         getCurrentUser();
+        favProductUser(pid);
 
         back.setOnClickListener(this);
         guarantee.setOnClickListener(this);
@@ -112,6 +118,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         choosen.setOnClickListener(this);
         writeComment.setOnClickListener(this);
         detailsDescribe.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     private void createBottomDialog() {
@@ -143,19 +154,62 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             edtComment.setText(null);
 
             Notification notification = new Notification(dateFormat.format(date), pid, currentUser.getName(), currentProduct.getImage());
-            ref = FirebaseDatabase.getInstance().getReference();
-            ref.child("notifications").child(currentUser.getUid()).child(randomString.nextString()).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            for (String uid : favUid) {
+                FirebaseDatabase.getInstance().getReference().child("notifications").child(uid).child(randomString.nextString()).setValue(notification);
+            }
+
+            FirebaseDatabase.getInstance().getReference().child("user").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(ProductActivity.this, "Đã gửi nhận xét!", Toast.LENGTH_SHORT).show();
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren())  {
+                        User u = ds.getValue(User.class);
+                        if (u.getEmail().equals(currentProduct.getCreator())) {
+                            FirebaseDatabase.getInstance().getReference().child("notifications").child(u.getUid()).child(randomString.nextString()).setValue(notification).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(ProductActivity.this, "Đã gửi nhận xét!", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Toast.makeText(ProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            break;
+                        }
                     }
-                    else {
-                        Toast.makeText(ProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
-                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(ProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+    }
+
+    private void favProductUser(String pid) {
+        FirebaseDatabase.getInstance().getReference().child("favourite").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                favUid = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Map<String, String> map = (Map)ds.getValue();
+                    for (String key : map.keySet()) {
+                        if (map.get(key).equals(pid) && !ds.getKey().equals(currentUser.getUid())) {
+                            favUid.add(ds.getKey());
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ProductActivity.this, "Có lỗi xảy ra, vui lòng thử lại!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void loadData() {
@@ -239,7 +293,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("favourite").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        ref.child("favourite").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean existed = false;
@@ -284,7 +338,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         ref = FirebaseDatabase.getInstance().getReference();
 
-        ref.child("cart").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        ref.child("cart").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean existed = false;
@@ -349,7 +403,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             .getReference()
             .child("seen")
             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-            .addValueEventListener(new ValueEventListener() {
+            .addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot ds : snapshot.getChildren()) {

@@ -45,7 +45,7 @@ public class RecyclerViewAdapterNotify extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.title.setText(mData.get(position).getTitle());
-        String sourceString = "<b>" + mData.get(position).getCustomerName() + "</b> " + " đã bình luận về sản phẩm của bạn";
+        String sourceString = "<b>" + mData.get(position).getCustomerName() + "</b> " + " đã bình luận về sản phẩm";
         holder.comment.setText(Html.fromHtml(sourceString));
         Glide.with(mContext).load(mData.get(position).getProductImageLink()).placeholder(R.drawable.img_no_image).into(holder.thumbnail);
 

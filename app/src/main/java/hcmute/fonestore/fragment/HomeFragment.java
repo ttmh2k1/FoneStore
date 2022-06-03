@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     List<CategoryWithThumnail> lstCategory;
     LinearLayout layoutFavorite;
     Button search, iphone, samsung, oppo, vivo, xiaomi;
-    ImageButton category;
+    ImageButton category, btnFavourite;
     ViewPager viewPager;
     ProgressBar loadingView, loadingViewHot;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Timer timer;
     final long DELAY_MS = 1500;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
-    static final int LIMIT_PRODUCT = 5;
+    public static final int LIMIT_PRODUCT = 5;
 
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
@@ -97,6 +97,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         vivo = root.findViewById(R.id.btn_vivo);
         xiaomi = root.findViewById(R.id.btn_xiaomi);
         category = root.findViewById(R.id.home_btn_category);
+        btnFavourite = root.findViewById(R.id.home_btn_favorite);
         viewPager = root.findViewById(R.id.viewPager);
         loadingView = root.findViewById(R.id.loading_view);
         loadingViewHot = root.findViewById(R.id.loading_hot);
@@ -114,6 +115,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         detailsHot.setOnClickListener(this);
         detailsCategory.setOnClickListener(this);
         category.setOnClickListener(this);
+        btnFavourite.setOnClickListener(this);
 
         setCategory();
         setLstBtnHot();
@@ -215,6 +217,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 List<Product> full = new ArrayList<>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(dataSnapshot1.getKey());
                     full.add(p);
                 }
@@ -243,6 +249,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstIphone = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(dataSnapshot1.getKey());
                     lstIphone.add(p);
                 }
@@ -271,6 +281,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstSamsung = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(dataSnapshot1.getKey());
                     lstSamsung.add(p);
                 }
@@ -300,6 +314,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstOppo = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(dataSnapshot1.getKey());
                     if (p.getCategory().equals("Điện thoại Oppo"))
                         lstOppo.add(p);
@@ -330,6 +348,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstVivo = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(dataSnapshot1.getKey());
                     if (p.getCategory().equals("Điện thoại Vivo"))
                         lstVivo.add(p);
@@ -360,6 +382,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lstXiaomi = new ArrayList<Product>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     Product p = dataSnapshot1.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(dataSnapshot1.getKey());
                     if (p.getCategory().equals("Điện thoại Xiaomi"))
                         lstXiaomi.add(p);
@@ -404,6 +430,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             if (lstFavourite.size() >= LIMIT_PRODUCT)
                                 return;
                             Product p = snapshot.getValue(Product.class);
+
+                            if (p.getActive().equals("0"))
+                                return;
+
                             p.setId(dataSnapshot1.getValue().toString());
                             lstFavourite.add(p);
                             myAdapterFavourite.notifyDataSetChanged();
@@ -477,13 +507,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.home_category_details:
+            case R.id.home_btn_category:
                 intent = new Intent(getActivity(), MainActivity.class);
                 intent.putExtra("Selection", "List");
                 startActivity(intent);
                 break;
-            case R.id.home_btn_category:
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("Selection", "List");
+            case R.id.home_btn_favorite:
+                intent = new Intent(getActivity(), FavoriteActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
         }

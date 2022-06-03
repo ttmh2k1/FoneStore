@@ -107,6 +107,8 @@ public class FavoriteActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Product p = snapshot.getValue(Product.class);
+                            if (p.getActive().equals("0"))
+                                return;
                             p.setId(dataSnapshot1.getValue().toString());
                             lstFavourite.add(p);
                             myAdapter.notifyDataSetChanged();

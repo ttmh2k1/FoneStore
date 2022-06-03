@@ -103,6 +103,8 @@
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_admin_product_mgr.xml" value="0.19972826086956522" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_admin_user_mgr.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_cart.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_forgot_password.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_posted_product.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_product_mgr.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/activity_seen_product.xml" value="0.25416666666666665" />
@@ -114,6 +116,7 @@
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/cardview_notify.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/cardview_product_mgr.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/cardview_user_mgr.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/fragment_notification.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/fragment_notify1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LeThiTam/Desktop/FoneStore/app/src/main/res/layout/fragment_thongbao.xml" value="0.25416666666666665" />

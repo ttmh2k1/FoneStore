@@ -120,6 +120,10 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
                 lstCategory = new ArrayList<Product>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Product p = ds.getValue(Product.class);
+
+                    if (p.getActive().equals("0"))
+                        continue;
+
                     p.setId(ds.getKey());
                     lstCategory.add(p);
                 }

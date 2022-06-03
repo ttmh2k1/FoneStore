@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -38,6 +40,7 @@ public class ProductMgrActivity extends AppCompatActivity {
     RecyclerView recyclerView_product_mgr;
     LinearLayout layout_no_product;
     ProgressBar loading_view_product;
+    ImageView btn_back;
     ArrayList<Product> lstProduct;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -46,12 +49,20 @@ public class ProductMgrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_product_mgr);
 
+        btn_back = findViewById(R.id.btn_back);
         recyclerView_product_mgr = findViewById(R.id.recyclerView_product_mgr);
         layout_no_product = findViewById(R.id.layout_no_product);
         loading_view_product = findViewById(R.id.loading_view_product);
         lstProduct = new ArrayList<>();
 
         loadData();
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
