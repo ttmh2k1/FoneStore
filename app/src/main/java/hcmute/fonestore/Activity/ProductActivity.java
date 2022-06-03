@@ -194,7 +194,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                     Glide.with(ProductActivity.this).load(dataSnapshot.child("image").getValue().toString())
                             .placeholder(R.drawable.img_no_image).into(img);
 
-                    seller = dataSnapshot.child("seller").getValue().toString();
+//                    seller = dataSnapshot.child("seller").getValue().toString();
                     sup = dataSnapshot.child("brand").getValue().toString();
                     produceLocate = dataSnapshot.child("producer").getValue().toString();
                     imageLink = dataSnapshot.child("image").getValue().toString();

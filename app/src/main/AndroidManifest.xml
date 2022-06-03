@@ -11,17 +11,24 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoneStore">
-
+        <activity
+            android:name=".DetailChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".Animation.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.DetailChatActivity" />
+        <activity android:name=".Activity.ChatActivity" />
         <activity android:name=".Activity.CartActivity" />
         <activity android:name=".Activity.CategoryActivity" />
         <activity android:name=".Activity.FavoriteActivity" />
@@ -31,13 +38,11 @@
         <activity android:name=".Activity.ProductDetailActivity" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.SearchActivity" />
-
         <activity android:name=".fragment.user.AddProductActivity" />
         <activity android:name=".fragment.user.BoughtActivity" />
         <activity android:name=".fragment.user.InfoActivity" />
         <activity android:name=".fragment.user.SettingsActivity" />
         <activity android:name=".fragment.user.UserActivity" />
-
     </application>
 
 </manifest>

@@ -3,6 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/drawable/ic_baseline_chat_24.xml" value="0.11" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.1465" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/drawable/ic_btn_add_cart.xml" value="0.1465" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/drawable/ic_chatapp_background.xml" value="0.11" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/drawable/ic_chatapp_foreground.xml" value="0.11" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/drawable/ic_seen_fill.xml" value="0.11" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/activity_cart.xml" value="0.1859375" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/activity_chat.xml" value="0.27447916666666666" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/activity_detail_chat.xml" value="0.264" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/activity_product.xml" value="0.1859375" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/activity_search.xml" value="0.21354166666666666" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/cardview_cart.xml" value="0.1" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/fragment_list.xml" value="0.27447916666666666" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/fragment_user.xml" value="0.2" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/row_message_for_detail_chat.xml" value="0.4" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/row_send_message_for_detail_chat.xml" value="0.2" />
+        <entry key="..\:/MyProjectAndroid/FoneStore/app/src/main/res/layout/row_user_for_chat.xml" value="0.27447916666666666" />
         <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1115" />
         <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="..\:/N3/HK2/DiDong/FoneStore/app/src/main/res/drawable/border0.xml" value="0.197" />

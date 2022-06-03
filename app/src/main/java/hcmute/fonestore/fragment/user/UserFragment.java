@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import hcmute.fonestore.Activity.ChatActivity;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Activity.FavoriteActivity;
@@ -29,7 +30,7 @@ import hcmute.fonestore.Activity.LoginActivity;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView cart;
-    Button btnManage, btnFavorite, btnLogout, btnBuylater, btnAccount, aboutus, setting;
+    Button btnManage, btnFavorite, btnLogout, btnBuylater, btnAccount, aboutus, setting, chat;
     TextView email, name, address;
     ImageView img;
 
@@ -53,6 +54,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         img = root.findViewById(R.id.user_img1);
         aboutus = root.findViewById(R.id.user_support);
         setting = root.findViewById(R.id.user_setting);
+        chat = root.findViewById(R.id.user_chat);
 
         loadData();
 
@@ -64,6 +66,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnAccount.setOnClickListener(this);
         aboutus.setOnClickListener(this);
         setting.setOnClickListener(this);
+        chat.setOnClickListener(this);
 
         return root;
     }
@@ -126,6 +129,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.user_setting:
                 intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.user_chat:
+                intent = new Intent(getActivity(), ChatActivity.class);
                 startActivity(intent);
                 break;
         }

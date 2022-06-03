@@ -23,6 +23,11 @@ import hcmute.fonestore.Object.Product;
 public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAdapterCart.MyViewHolder> {
     private Context mContext;
     private ArrayList<Product> mData;
+//    private IClickBtnQuantity mClickBtnQuantity;
+//
+//    public interface IClickBtnQuantity {
+//        void ClickAddQuantity();
+//    }
 
     public RecyclerViewAdapterCart(Context mContext, ArrayList<Product> mData) {
         this.mContext = mContext;
@@ -40,7 +45,7 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.name.setText(mData.get(position).getName());
         holder.producer.setText("Cung cấp bởi " + mData.get(position).getProducer());
-        holder.price.setText(mData.get(position).getPrice());
+        holder.price.setText(String.valueOf(mData.get(position).getPrice()));
         Glide.with(mContext).load(mData.get(position).getImage()).placeholder(R.drawable.img_no_image).into(holder.image);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +56,7 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
                 mContext.startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -72,8 +78,8 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
         return mData;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView producer, name, price;
-        ImageView image;
+        TextView producer, name, price, tvQuantity;
+        ImageView image, btnAdd, btnSub;
         CardView cardView;
 
         public MyViewHolder(View itemView) {
@@ -84,6 +90,10 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
             name = (TextView) itemView.findViewById(R.id.cart_name);
             image = (ImageView) itemView.findViewById(R.id.imageView_cart);
             cardView =  itemView.findViewById(R.id.card_cart);
+            tvQuantity = itemView.findViewById(R.id.tvQuantity);
+            btnAdd = itemView.findViewById(R.id.btnAdd);
+            btnSub =itemView.findViewById(R.id.btnSub);
+
         }
     }
 }

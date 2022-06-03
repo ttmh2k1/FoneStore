@@ -6,12 +6,13 @@ public class Product {
     @Exclude
     private String id;
 
-    private String name, image, category, producer, brand, origin, describe, price, seller;
+    private String name, image, category, producer, brand, origin, describe;
+    private int price;
 
     public Product() {
     }
 
-    public Product(String name, String image, String price, String category, String producer, String brand, String origin, String describe, String seller) {
+    public Product(String name, String image, int price, String category, String producer, String brand, String origin, String describe) {
         this.name = name;
         this.image = image;
         this.category = category;
@@ -20,10 +21,9 @@ public class Product {
         this.origin = origin;
         this.describe = describe;
         this.price = price;
-        this.seller = seller;
     }
 
-    public Product(String id, String name, String image, String price, String category, String producer, String brand, String origin, String describe, String seller) {
+    public Product(String id, String name, String image, int price, String category, String producer, String brand, String origin, String describe, String seller) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -33,7 +33,6 @@ public class Product {
         this.origin = origin;
         this.describe = describe;
         this.price = price;
-        this.seller = seller;
     }
 
     public String getId() {
@@ -100,19 +99,11 @@ public class Product {
         this.describe = describe;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
-    }
-
-    public String getSeller() {
-        return seller;
-    }
-
-    public void setSeller(String seller) {
-        this.seller = seller;
     }
 }
