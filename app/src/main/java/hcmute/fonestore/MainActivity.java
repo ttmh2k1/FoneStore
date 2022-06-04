@@ -86,11 +86,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Intent notificationService = new Intent(MainActivity.this, NotificationService.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        startService(notificationService);
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForegroundService(notificationService);
         } else {
             startService(notificationService);
-        }
+        }*/
     }
 
     private boolean loadFragment(Fragment fragment, int newPosition) {

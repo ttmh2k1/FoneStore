@@ -39,6 +39,7 @@ public class NotificationService extends Service {
     @Override
     public void onCreate() {
         createNotificationChannel(getApplicationContext());
+        
         listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
