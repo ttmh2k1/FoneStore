@@ -28,6 +28,7 @@ import hcmute.fonestore.MainActivity;
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.R;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCart;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCommon;
 
 public class SeenProductActivity extends AppCompatActivity {
     RecyclerView recyclerView_recently_seen;
@@ -36,7 +37,7 @@ public class SeenProductActivity extends AppCompatActivity {
     ProgressBar loading_view_recent;
     Button btn_continue;
     ArrayList<Product> lstProduct;
-    RecyclerViewAdapterCart myAdapter;
+    RecyclerViewAdapterCommon myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,13 +84,19 @@ public class SeenProductActivity extends AppCompatActivity {
                 if (snapshot.exists()) layout_no_recent.setVisibility(View.GONE);
                 loading_view_recent.setVisibility(View.GONE);
 
-                myAdapter = new RecyclerViewAdapterCart(SeenProductActivity.this, lstProduct);
+                myAdapter = new RecyclerViewAdapterCommon(SeenProductActivity.this, lstProduct);
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     FirebaseDatabase.getInstance().getReference().child("product").child(ds.getValue().toString()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Product p = snapshot.getValue(Product.class);
+                            if (p == null) {
+                                snapshot.getRef().removeValue();
+                                return;
+                            }
+                            if (p.getActive().equals("0"))
+                                return;
                             p.setId(ds.getValue().toString());
                             lstProduct.add(p);
                             myAdapter.notifyDataSetChanged();

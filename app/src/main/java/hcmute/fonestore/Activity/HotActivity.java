@@ -26,6 +26,7 @@ import hcmute.fonestore.R;
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapter;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCart;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCommon;
 
 public class HotActivity extends AppCompatActivity {
     ArrayList<Product> lstHot;
@@ -76,7 +77,7 @@ public class HotActivity extends AppCompatActivity {
                 for (int i = 0; i < 5 && i < full.size(); i++)
                     lstHot.add(full.get(i));
 
-                recyclerView.setAdapter(new RecyclerViewAdapterCart(HotActivity.this, lstHot));
+                recyclerView.setAdapter(new RecyclerViewAdapterCommon(HotActivity.this, lstHot));
             }
 
             @Override

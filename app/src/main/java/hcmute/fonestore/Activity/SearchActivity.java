@@ -28,6 +28,7 @@ import java.util.Comparator;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCart;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCommon;
 
 public class SearchActivity extends AppCompatActivity {
     EditText searchText;
@@ -99,7 +100,7 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayoutManager layoutManagerCart = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         final RecyclerView recyclerViewCart = (RecyclerView) findViewById(R.id.recyclerView_search);
         recyclerViewCart.setLayoutManager(layoutManagerCart);
-        RecyclerViewAdapterCart myAdapterCart = new RecyclerViewAdapterCart(SearchActivity.this, myList);
+        RecyclerViewAdapterCommon myAdapterCart = new RecyclerViewAdapterCommon(SearchActivity.this, myList);
         recyclerViewCart.setAdapter(myAdapterCart);
     }
 
@@ -114,7 +115,7 @@ public class SearchActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        final RecyclerViewAdapterCart myAdapter = new RecyclerViewAdapterCart(SearchActivity.this, lstSearch);
+        final RecyclerViewAdapterCommon myAdapter = new RecyclerViewAdapterCommon(SearchActivity.this, lstSearch);
         recyclerView.setAdapter(myAdapter);
 
         final String finalSearch = search;

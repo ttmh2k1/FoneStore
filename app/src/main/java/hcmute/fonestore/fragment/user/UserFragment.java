@@ -27,13 +27,14 @@ import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Activity.FavoriteActivity;
 import hcmute.fonestore.Activity.LoginActivity;
 import hcmute.fonestore.fragment.user.admin.AddProductActivity;
+import hcmute.fonestore.fragment.user.admin.OrderMgrActivity;
 import hcmute.fonestore.fragment.user.admin.ProductMgrActivity;
 import hcmute.fonestore.fragment.user.admin.UserMgrActivity;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView cart;
-    Button btnFavorite, btnLogout, btnAccount, aboutus, setting, btnSeenProduct;
-    Button btnAdminAccountMgr, btnAdminProductMgr, btnAdminCreateProduct;
+    Button btnFavorite, btnLogout, btnAccount, btnOrder, aboutus, setting, btnSeenProduct;
+    Button btnAdminAccountMgr, btnAdminProductMgr, btnAdminCreateProduct, btnAdminOrderMgr;
     TextView email, name, address;
     ImageView img;
 
@@ -49,10 +50,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnFavorite = root.findViewById(R.id.user_favorite);
         btnAccount = root.findViewById(R.id.user_infoAccount);
         btnLogout = root.findViewById(R.id.user_logout);
+        btnOrder = root.findViewById(R.id.btn_user_order);
 
         btnAdminAccountMgr = root.findViewById(R.id.btn_admin_account_mgr);
         btnAdminProductMgr = root.findViewById(R.id.btn_admin_product_mgr);
         btnAdminCreateProduct = root.findViewById(R.id.btn_admin_create_product);
+        btnAdminOrderMgr = root.findViewById(R.id.btn_admin_order_mgr);
 
         cart = root.findViewById(R.id.btn_user_cart);
         email = root.findViewById(R.id.user_email);
@@ -74,6 +77,8 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnAdminProductMgr.setOnClickListener(this);
         btnAdminCreateProduct.setOnClickListener(this);
         btnSeenProduct.setOnClickListener(this);
+        btnOrder.setOnClickListener(this);
+        btnAdminOrderMgr.setOnClickListener(this);
 
         return root;
     }
@@ -89,6 +94,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     btnAdminAccountMgr.setVisibility(View.GONE);
                     btnAdminProductMgr.setVisibility(View.GONE);
                     btnAdminCreateProduct.setVisibility(View.GONE);
+                    btnAdminOrderMgr.setVisibility(View.GONE);
                 }
             }
 
@@ -159,6 +165,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btn_admin_create_product:
                 intent = new Intent(getActivity(), AddProductActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_user_order:
+                intent = new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_admin_order_mgr:
+                intent = new Intent(getActivity(), OrderMgrActivity.class);
                 startActivity(intent);
                 break;
         }

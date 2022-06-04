@@ -413,7 +413,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        FirebaseDatabase.getInstance().getReference().child("favourite").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("favourite").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 loadingView.setVisibility(GONE);
@@ -430,6 +430,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             if (lstFavourite.size() >= LIMIT_PRODUCT)
                                 return;
                             Product p = snapshot.getValue(Product.class);
+
+                            if (p == null) {
+                                dataSnapshot1.getRef().removeValue();
+                                return;
+                            }
 
                             if (p.getActive().equals("0"))
                                 return;

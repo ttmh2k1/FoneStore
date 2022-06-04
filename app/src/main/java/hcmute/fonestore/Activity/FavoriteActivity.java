@@ -40,6 +40,7 @@ import hcmute.fonestore.MainActivity;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCart;
+import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterCommon;
 
 public class FavoriteActivity extends AppCompatActivity {
     ArrayList<Product> lstFavourite;
@@ -53,7 +54,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     DatabaseReference reference;
-    RecyclerViewAdapterCart myAdapter;
+    RecyclerViewAdapterCommon myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +108,10 @@ public class FavoriteActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Product p = snapshot.getValue(Product.class);
+                            if (p == null) {
+                                snapshot.getRef().removeValue();
+                                return;
+                            }
                             if (p.getActive().equals("0"))
                                 return;
                             p.setId(dataSnapshot1.getValue().toString());
@@ -121,7 +126,7 @@ public class FavoriteActivity extends AppCompatActivity {
                     });
                 }
 
-                myAdapter = new RecyclerViewAdapterCart(FavoriteActivity.this, lstFavourite);
+                myAdapter = new RecyclerViewAdapterCommon(FavoriteActivity.this, lstFavourite);
                 recyclerView.setAdapter(myAdapter);
                 myAdapter.notifyDataSetChanged();
 

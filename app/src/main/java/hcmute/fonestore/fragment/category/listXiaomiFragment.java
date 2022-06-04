@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.R;
@@ -30,17 +32,31 @@ import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterXiaomi;
 public class listXiaomiFragment extends Fragment {
     ArrayList<Product> lstXiaomi;
     Button category;
+    TextView load_more;
+    static final int LIMIT_PRODUCT = 6;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list_xiaomi, container, false);
         category = root.findViewById(R.id.btn_list_xiaomi);
+        load_more = root.findViewById(R.id.load_more);
+
+        load_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                intent.putExtra("Category", category.getText());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CategoryActivity.class);
                 intent.putExtra("Category", category.getText());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -54,12 +70,20 @@ public class listXiaomiFragment extends Fragment {
                 lstXiaomi = new ArrayList<Product>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Product p = ds.getValue(Product.class);
+                    if (p.getActive().equals("0"))
+                        continue;
                     p.setId(ds.getKey());
                     if (p.getCategory().equals("Điện thoại Xiaomi"))
                         lstXiaomi.add(p);
                 }
-                RecyclerViewAdapter myAdapter = new RecyclerViewAdapter(getContext(),lstXiaomi);
-                myrv.setAdapter(myAdapter);
+
+                if (lstXiaomi.size() < LIMIT_PRODUCT + 1) {
+                    myrv.setAdapter(new RecyclerViewAdapter(getContext(), lstXiaomi));
+                }
+                else {
+                    Collections.shuffle(lstXiaomi);
+                    myrv.setAdapter(new RecyclerViewAdapter(getContext(), lstXiaomi.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override

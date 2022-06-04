@@ -38,6 +38,8 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.SearchActivity" />
         <activity android:name=".Activity.ForgotPasswordActivity" />
+        <activity android:name=".Activity.PlaceOrderActivity" />
+        <activity android:name=".fragment.user.OrderActivity" />
         <activity android:name=".fragment.user.admin.AddProductActivity" />
         <activity android:name=".fragment.user.InfoActivity" />
         <activity android:name=".fragment.user.SettingsActivity" />
@@ -45,6 +47,7 @@
         <activity android:name=".fragment.user.SeenProductActivity" />
         <activity android:name=".fragment.user.admin.UserMgrActivity" />
         <activity android:name=".fragment.user.admin.ProductMgrActivity" />
+        <activity android:name=".fragment.user.admin.OrderMgrActivity" />
     </application>
 
 </manifest>

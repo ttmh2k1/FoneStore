@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.R;
@@ -30,11 +32,23 @@ import hcmute.fonestore.RecyclerViewAdapter.RecyclerViewAdapterSamsung;
 public class listSamsungFragment extends Fragment {
     ArrayList<Product> lstSamsung;
     Button category;
+    TextView load_more;
+    static final int LIMIT_PRODUCT = 6;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_list_samsung, container, false);
         category = root.findViewById(R.id.btn_list_samsung);
+        load_more = root.findViewById(R.id.load_more);
+
+        load_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                intent.putExtra("Category", category.getText());
+                startActivity(intent);
+            }
+        });
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,13 +68,20 @@ public class listSamsungFragment extends Fragment {
                 lstSamsung = new ArrayList<Product>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     Product p = ds.getValue(Product.class);
+                    if (p.getActive().equals("0"))
+                        continue;
                     p.setId(ds.getKey());
                     if (p.getCategory().equals("Điện thoại Samsung"))
                         lstSamsung.add(p);
                 }
 
-                RecyclerViewAdapter myAdapterSamsung = new RecyclerViewAdapter(getContext(), lstSamsung);
-                myrv.setAdapter(myAdapterSamsung);
+                if (lstSamsung.size() < LIMIT_PRODUCT + 1) {
+                    myrv.setAdapter(new RecyclerViewAdapter(getContext(), lstSamsung));
+                }
+                else {
+                    Collections.shuffle(lstSamsung);
+                    myrv.setAdapter(new RecyclerViewAdapter(getContext(), lstSamsung.subList(0, LIMIT_PRODUCT)));
+                }
             }
 
             @Override

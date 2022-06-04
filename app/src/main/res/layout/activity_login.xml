@@ -73,7 +73,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:background="@drawable/button_selector3"
-        android:text="login"
+        android:text="ĐĂNG NHẬP"
         android:textColor="@color/white"
         android:textStyle="bold" />
 
@@ -84,7 +84,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:background="?attr/selectableItemBackground"
-        android:text="No account yet? Create one"
+        android:text="Đăng ký"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/red" />
 </LinearLayout>

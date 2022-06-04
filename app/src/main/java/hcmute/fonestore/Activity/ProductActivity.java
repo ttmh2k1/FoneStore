@@ -41,6 +41,7 @@ import java.util.Map;
 import java.util.Set;
 
 import hcmute.fonestore.Animation.LoadingDialog;
+import hcmute.fonestore.Object.CartItem;
 import hcmute.fonestore.Object.Notification;
 import hcmute.fonestore.Object.Product;
 import hcmute.fonestore.Object.User;
@@ -223,7 +224,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                     Toast.makeText(ProductActivity.this, "Sản phẩm này đã bị xóa!", Toast.LENGTH_SHORT).show();
                 } else {
                     currentProduct = dataSnapshot.getValue(Product.class);
-
+                    currentProduct.setId(dataSnapshot.getKey());
                     name.setText(currentProduct.getName());
                     price.setText(currentProduct.getFormattedPrice());
                     category.setText(currentProduct.getCategory());
@@ -344,14 +345,20 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 boolean existed = false;
 
                 for (DataSnapshot ds: snapshot.getChildren()) {
-                    if (ds.getValue().toString().equals(pid)) {
+                    CartItem c = ds.getValue(CartItem.class);
+                    c.setKey(ds.getKey());
+
+                    if (c.getProduct().getId().equals(pid)) {
+                        c.setQty(c.getQty() + 1);
+                        ds.getRef().setValue(c);
                         existed = true;
                         break;
                     }
                 }
 
                 if (!existed) {
-                    ref.child("cart").child(currentUser.getUid()).child(randomString.nextString()).setValue(pid).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    CartItem c = new CartItem(currentProduct, 1);
+                    ref.child("cart").child(currentUser.getUid()).child(randomString.nextString()).setValue(c).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
