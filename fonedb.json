@@ -1,0 +1,563 @@
+{
+  "bills": {
+    "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2": {
+      "engxIdPefHLlGtR88VwMq": {
+        "orderProducts": [
+          {
+            "key": "JNJL0fh59ERSaUETUUcVS",
+            "product": {
+              "active": "1",
+              "brand": "abc",
+              "category": "Điện thoại Vivo",
+              "creator": "a@gmail.com",
+              "describe": "Thiết kế mỏng nhẹ cùng màu sắc tinh tế Vivo V23e vẫn giữ đặc điểm nổi bật của Vivo V Series với thiết kế mỏng 7.36 mm ấn tượng (ở phiên bản màu đen). Viền màn hình 2 cạnh bên có độ mỏng ở mức vừa phải, tuy nhiên thì phần cạnh dưới thì có dày hơn một chút.",
+              "formattedPrice": "8.490.000 VNĐ",
+              "id": "ndtest464",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/Vivo-V23e-1-2-200x200.jpg?alt=media&token=132a1048-1032-4d84-b9f0-bb776c3ca353",
+              "name": "Điện thoại Vivo V23e",
+              "origin": "abc",
+              "price": 8490000,
+              "producer": "abc"
+            },
+            "qty": 1
+          }
+        ],
+        "orderTime": "04-06-2022 13:24:05",
+        "status": 0,
+        "stringStatus": "Đang chờ xác nhận"
+      },
+      "vQ6wtBvU61TP6thiKnofv": {
+        "orderProducts": [
+          {
+            "key": "0XOraURkpO9kgld2hKd8F",
+            "product": {
+              "active": "1",
+              "brand": "abc",
+              "category": "Điện thoại Samsung",
+              "creator": "a@gmail.com",
+              "describe": "Thiết kế nâng tầm smartphone màn hình gập Có thể thấy mẫu smartphone Galaxy Z Fold3 lần này vẫn giữ nguyên ngoại hình cùng cơ chế màn hình gập mở dạng quyển sách như của tiền nhiệm, \"hô biến\" chiếc smartphone thành một chiếc máy tính bảng mini một cách dễ dàng và ngược lại.",
+              "formattedPrice": "41.900.000 VNĐ",
+              "id": "hmsntyshs",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/adcaddqwd.jpg?alt=media&token=7381bfc0-9727-4340-ac63-d0fb2aecd8ab",
+              "name": "Điện thoại Samsung Galaxy Z Fold3 5G 256GB",
+              "origin": "abc",
+              "price": 41900000,
+              "producer": "abc"
+            },
+            "qty": 1
+          }
+        ],
+        "orderTime": "04-06-2022 13:15:33",
+        "status": 0,
+        "stringStatus": "Đang chờ xác nhận"
+      }
+    },
+    "SZy49QMDoUO5lf8u3YwCDVEX8Ky2": {
+      "2OujH01d4tOrHGWd5EsFZ": {
+        "orderProducts": [
+          {
+            "key": "Yf6bkJ1s2njXQtii4VNmG",
+            "product": {
+              "active": "1",
+              "brand": "xyz",
+              "category": "Điện thoại Samsung",
+              "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+              "describe": "Nổi bật với ngoại hình đầy ấn tượng Samsung đã trình làng Galaxy M53 với ba phiên bản màu vô cùng đẹp mắt như mình đang cầm trên tay, với tone màu có hơi sẫm đi một tí làm toát lên một vẻ huyền bí đầy cuốn hút và thanh lịch.",
+              "formattedPrice": "12,290,000 VNĐ",
+              "id": "sfvkwhfb326",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/adaqdqed.jpg?alt=media&token=b5d65169-7b5b-41cb-a0c0-03b76b7f6523",
+              "name": "Điện thoại Samsung Galaxy M53",
+              "origin": "mno",
+              "price": 12290000,
+              "producer": "abc"
+            },
+            "qty": 1
+          },
+          {
+            "key": "aMoDtXzaJpBbbfzHZeqSJ",
+            "product": {
+              "active": "1",
+              "brand": "abc",
+              "category": "Điện thoại Iphone",
+              "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+              "describe": "iPhone SE 2020 vẫn có kích thước 4.7 inch, tỉ lệ màn hình cũ 16:9 và các cạnh viền vẫn dày. Tuy nhiên kích thước chung của máy vẫn thuộc hàng nhỏ gọn, cực kì vừa vặn và dễ sử dụng bằng một tay.",
+              "formattedPrice": "10,000,000 VNĐ",
+              "id": "vdsfvcn436tcdsc",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/fscsfrfgrgrg.jpg?alt=media&token=3ba76bd2-2c45-4f88-a5c4-a546a377dc8d",
+              "name": "Điện thoại iPhone SE 64GB (2020) (Hộp mới)",
+              "origin": "abc",
+              "price": 10000000,
+              "producer": "abc"
+            },
+            "qty": 1
+          },
+          {
+            "key": "aR8vreonUVtRVIR0H0qq7",
+            "product": {
+              "active": "1",
+              "brand": "abc",
+              "category": "Điện thoại Xiaomi",
+              "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+              "describe": "Hiệu năng vượt trội với Snapdragon 732G Mi 11 Lite trang bị con chip đến từ Qualcomm, sản xuất trên tiến trình 8 nm sẵn sàng cùng bạn chiến mọi tựa game phổ biến hiện nay với tốc độ tối đa lên đến 2.3 GHz.",
+              "formattedPrice": "7,990,000 VNĐ",
+              "id": "snedtse75e",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/xiaomi-mi-11-lite-4g-xanh-duong-1-org.jpg?alt=media&token=87024a24-a3df-4b65-bdac-7d6e8dff4a7d",
+              "name": "Điện thoại Xiaomi Mi 11 Lite",
+              "origin": "abc",
+              "price": 7990000,
+              "producer": "abc"
+            },
+            "qty": 1
+          }
+        ],
+        "orderTime": "04-06-2022 11:40:01",
+        "status": 2,
+        "stringStatus": "Đang chờ xác nhận"
+      },
+      "jXTgeu84UTb1b483HJDiS": {
+        "orderProducts": [
+          {
+            "key": "Ae6WP2CjGjOWkidNoJL07",
+            "product": {
+              "active": "1",
+              "brand": "abc",
+              "category": "Điện thoại Samsung",
+              "creator": "a@gmail.com",
+              "describe": "Thiết kế nâng tầm smartphone màn hình gập Có thể thấy mẫu smartphone Galaxy Z Fold3 lần này vẫn giữ nguyên ngoại hình cùng cơ chế màn hình gập mở dạng quyển sách như của tiền nhiệm, \"hô biến\" chiếc smartphone thành một chiếc máy tính bảng mini một cách dễ dàng và ngược lại.",
+              "formattedPrice": "41,900,000 VNĐ",
+              "id": "hmsntyshs",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/adcaddqwd.jpg?alt=media&token=7381bfc0-9727-4340-ac63-d0fb2aecd8ab",
+              "name": "Điện thoại Samsung Galaxy Z Fold3 5G 256GB",
+              "origin": "abc",
+              "price": 41900000,
+              "producer": "abc"
+            },
+            "qty": 1
+          },
+          {
+            "key": "fEpMmXkUNONjh1wFQeY8I",
+            "product": {
+              "active": "1",
+              "brand": "abc",
+              "category": "Điện thoại Xiaomi",
+              "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+              "describe": "Hiệu năng vượt trội với Snapdragon 732G Mi 11 Lite trang bị con chip đến từ Qualcomm, sản xuất trên tiến trình 8 nm sẵn sàng cùng bạn chiến mọi tựa game phổ biến hiện nay với tốc độ tối đa lên đến 2.3 GHz.",
+              "formattedPrice": "7,990,000 VNĐ",
+              "id": "snedtse75e",
+              "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/xiaomi-mi-11-lite-4g-xanh-duong-1-org.jpg?alt=media&token=87024a24-a3df-4b65-bdac-7d6e8dff4a7d",
+              "name": "Điện thoại Xiaomi Mi 11 Lite",
+              "origin": "abc",
+              "price": 7990000,
+              "producer": "abc"
+            },
+            "qty": 1
+          }
+        ],
+        "orderTime": "04-06-2022 11:39:25",
+        "status": 2,
+        "stringStatus": "Đang chờ xác nhận"
+      }
+    }
+  },
+  "chats": {
+    "-N3fuN9xj7InV4xV7BM4": {
+      "isSeen": false,
+      "message": "dang I'm giving do",
+      "receiver": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2",
+      "sender": "admin",
+      "time": "1654299130406"
+    },
+    "-N3fyalcxVPhC3KK7eg0": {
+      "isSeen": true,
+      "message": "hello",
+      "receiver": "admin",
+      "sender": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2",
+      "time": "1654300238781"
+    },
+    "-N3g3-4PKVT3hDRn0z4D": {
+      "isSeen": true,
+      "message": "rep me pls",
+      "receiver": "admin",
+      "sender": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2",
+      "time": "1654301653108"
+    },
+    "-N3g5cPbVkpjt0c23V8s": {
+      "isSeen": true,
+      "message": "Kong rep daughter liuliu,😆😆😆",
+      "receiver": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2",
+      "sender": "admin",
+      "time": "1654302342609"
+    },
+    "-N3hNW7kuWjqWyb-J7Yf": {
+      "isSeen": true,
+      "message": "hello",
+      "receiver": "admin",
+      "sender": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2",
+      "time": "1654323810686"
+    },
+    "-N3hOY1ZlA1qryOMapKk": {
+      "isSeen": false,
+      "message": "hello",
+      "receiver": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2",
+      "sender": "admin",
+      "time": "1654324080151"
+    }
+  },
+  "favourite": {
+    "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2": {
+      "5vKcX9KbBUVCjnRwbulDO": "snedtse75e"
+    },
+    "SZy49QMDoUO5lf8u3YwCDVEX8Ky2": {
+      "C9B0B6UIcOTgeFhMoEE15": "ndtest464",
+      "iaAMbLRx9ScoCjYi6aI9X": "sfvkwhfb326",
+      "yCNBySm0HEmmQTTfnHDaU": "vdsfvcn436tcdsc"
+    }
+  },
+  "notifications": {
+    "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2": {
+      "GEopaX0eJjAS0syZKqsNs": {
+        "customerName": "Le Van B",
+        "productId": "snedtse75e",
+        "productImageLink": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/xiaomi-mi-11-lite-4g-xanh-duong-1-org.jpg?alt=media&token=87024a24-a3df-4b65-bdac-7d6e8dff4a7d",
+        "title": "03-06-2022 21:34:23"
+      },
+      "SLjZhg6YZLFpM9wWPLGxj": {
+        "customerName": "Le Van B",
+        "productId": "hmsntyshs",
+        "productImageLink": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/adcaddqwd.jpg?alt=media&token=7381bfc0-9727-4340-ac63-d0fb2aecd8ab",
+        "title": "03-06-2022 00:36:31"
+      }
+    },
+    "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2": {
+      "ToTPzvBN8swMksFZ8ZDSN": {
+        "customerName": "Phan Gia Anh",
+        "productId": "rynfsxnfgsry",
+        "productImageLink": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/dvfvsvs.jpg?alt=media&token=48bd92ed-9cb2-4d12-aa7c-12940063cc4c",
+        "title": "02-06-2022 23:04:41"
+      }
+    },
+    "SZy49QMDoUO5lf8u3YwCDVEX8Ky2": {
+      "dA2IXuCF6nPaePhdYXzLK": {
+        "customerName": "Phan Gia Anh",
+        "productId": "snedtse75e",
+        "productImageLink": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/xiaomi-mi-11-lite-4g-xanh-duong-1-org.jpg?alt=media&token=87024a24-a3df-4b65-bdac-7d6e8dff4a7d",
+        "title": "01-06-2022 00:01:12"
+      }
+    }
+  },
+  "product": {
+    "7rnSWic4TLqs6hw7PTRiQ": {
+      "active": "1",
+      "brand": "Nokia",
+      "category": "Điện thoại Iphone",
+      "comment": {
+        "7g6gudAZXLSR4BHBmi5n9": {
+          "comment": "tot",
+          "customerName": "Le Van B",
+          "id": "7g6gudAZXLSR4BHBmi5n9",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1653896355624.png?alt=media&token=67d6513d-3791-45bd-a8e9-f608abf285c4",
+          "userId": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2"
+        },
+        "EHWcp7wMsfSHXsj9oA45x": {
+          "comment": "good",
+          "customerName": "asd asd asd",
+          "id": "EHWcp7wMsfSHXsj9oA45x",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1653850613222.png?alt=media&token=6014ab2c-f0de-42ef-a7ea-576aef1d50a6",
+          "userId": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2"
+        }
+      },
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Nokia 3 vẫn có một phần nào đó thiết kế của hãng Nokia Với thân máy polycarbonate điêu khắc và chế tác tỉ mỉ, khung nhôm mang lại cảm giác chắc chắn, từng chi tiết được hoàn thiện rất tốt tối ưu rất tốt cho việc sử dụng của người dùng.",
+      "id": "7rnSWic4TLqs6hw7PTRiQ",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1653898405496.png?alt=media&token=8eea7ff7-1176-4672-8a26-6d0da0859781",
+      "name": "Nokia 3",
+      "origin": "China",
+      "price": 15000,
+      "producer": "Nokia HDMI"
+    },
+    "eeeccdsaasac": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Iphone",
+      "comment": {
+        "7HwuizRQ165uKhhGkEQ03": {
+          "comment": "so high quality ",
+          "customerName": "Thank Neef May Ban ",
+          "id": "7HwuizRQ165uKhhGkEQ03",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1654011212119.png?alt=media&token=a687f8bd-3767-48db-b3a9-0f8e76494165",
+          "userId": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2"
+        },
+        "j2FNfK86LT6nYqoBygPB2": {
+          "comment": "Iwant to buy it on !!!!",
+          "customerName": "Thank Neef May Ban ",
+          "id": "j2FNfK86LT6nYqoBygPB2",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1654011212119.png?alt=media&token=a687f8bd-3767-48db-b3a9-0f8e76494165",
+          "userId": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2"
+        }
+      },
+      "creator": "a@gmail.com",
+      "describe": "Điện thoại iPhone 13 Pro Max 128GB",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/iphone-13-pro-max-1-3.jpg?alt=media&token=d54e7e4c-aa38-46b9-9682-1cb367241932",
+      "name": "Điện thoại iPhone 13 Pro Max 128GB",
+      "origin": "abc",
+      "price": 30500000,
+      "producer": "abc"
+    },
+    "fdebtbdzs": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Oppo",
+      "creator": "a@gmail.com",
+      "describe": "Tỏa sáng với ngoại hình bắt mắt đầy sang trọng Điều làm mình mê hoặc ngay từ cái nhìn đầu tiên là mặt lưng hết sức bóng bẩy, với phiên bản màu đen thì mình hoàn toàn có thể sử dụng chiếc máy với công dụng tương tự như một chiếc gương soi tiện ích.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/evadva.jpg?alt=media&token=40efc501-a315-483c-a8bb-732ea72819e9",
+      "name": "Điện thoại OPPO Find X5 Pro 5G",
+      "origin": "abc",
+      "price": 32990000,
+      "producer": "ace"
+    },
+    "hmsntyshs": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Samsung",
+      "comment": {
+        "UOWRHwOGxsMGBzzYK62bn": {
+          "comment": "DEP A NHA",
+          "customerName": "Le Van B",
+          "id": "UOWRHwOGxsMGBzzYK62bn",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1653896355624.png?alt=media&token=67d6513d-3791-45bd-a8e9-f608abf285c4",
+          "userId": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2"
+        }
+      },
+      "creator": "a@gmail.com",
+      "describe": "Thiết kế nâng tầm smartphone màn hình gập Có thể thấy mẫu smartphone Galaxy Z Fold3 lần này vẫn giữ nguyên ngoại hình cùng cơ chế màn hình gập mở dạng quyển sách như của tiền nhiệm, \"hô biến\" chiếc smartphone thành một chiếc máy tính bảng mini một cách dễ dàng và ngược lại.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/adcaddqwd.jpg?alt=media&token=7381bfc0-9727-4340-ac63-d0fb2aecd8ab",
+      "name": "Điện thoại Samsung Galaxy Z Fold3 5G 256GB",
+      "origin": "abc",
+      "price": 41900000,
+      "producer": "abc"
+    },
+    "ndtest464": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Vivo",
+      "creator": "a@gmail.com",
+      "describe": "Thiết kế mỏng nhẹ cùng màu sắc tinh tế Vivo V23e vẫn giữ đặc điểm nổi bật của Vivo V Series với thiết kế mỏng 7.36 mm ấn tượng (ở phiên bản màu đen). Viền màn hình 2 cạnh bên có độ mỏng ở mức vừa phải, tuy nhiên thì phần cạnh dưới thì có dày hơn một chút.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/Vivo-V23e-1-2-200x200.jpg?alt=media&token=132a1048-1032-4d84-b9f0-bb776c3ca353",
+      "name": "Điện thoại Vivo V23e",
+      "origin": "abc",
+      "price": 8490000,
+      "producer": "abc"
+    },
+    "ngrsnnsaa": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Vivo",
+      "creator": "a@gmail.com",
+      "describe": "Thiết kế “sang xịn” Về phần thiết kế của smartphone Vivo có thể nói chưa bao giờ làm người dùng thất vọng. Vivo V23 5G vẫn giữ được các điểm nổi bật của Vivo V Series, có thiết kế khung kim loại chắc chắn, các cạnh phẳng mạnh mẽ, 4 góc hoàn thiện bo cong nhẹ thêm phần sang chảnh cho tổng thể, tạo cảm giác cầm nắm chắc tay.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/rsfvregvsre.jpg?alt=media&token=8f05ec3f-12c2-48c6-b5c1-3d3d798ff861",
+      "name": "Điện thoại Vivo V23 5G ",
+      "origin": "abc",
+      "price": 12990000,
+      "producer": "abc"
+    },
+    "rynfsxnfgsry": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Oppo",
+      "comment": {
+        "79CTV3la8h5nsxwiA1hOC": {
+          "comment": "cccc",
+          "customerName": "Thank Neef May Ban ",
+          "id": "79CTV3la8h5nsxwiA1hOC",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1654011212119.png?alt=media&token=a687f8bd-3767-48db-b3a9-0f8e76494165",
+          "userId": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2"
+        }
+      },
+      "creator": "a@gmail.com",
+      "describe": "Dễ dàng nổi bật giữa đám đông Điện thoại OPPO Reno7 Z 5G có khung viền vát phẳng, vuông vức trendy làm cho máy toát lên nét hiện đại và năng động. Bốn góc được bo cong mềm mại tạo cảm giác thoải mái và nhẹ nhàng (chỉ 173 g). Với thiết kế nguyên khối làm tổng thể máy trở nên cực kỳ chắc chắn, không chỉ đẹp mà còn tăng độ bền.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/dvfvsvs.jpg?alt=media&token=48bd92ed-9cb2-4d12-aa7c-12940063cc4c",
+      "name": "Điện thoại OPPO Reno7 Z 5G",
+      "origin": "abc",
+      "price": 10490000,
+      "producer": "abc"
+    },
+    "sdcfddvsssdeerf": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Iphone",
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Thiết kế sang trọng, cao cấp Điểm nhấn đầu tiên phải kể đến ở dòng máy này chính là viền máy không còn được thiết kế bo cong các cạnh, mà thay vào đó là phần cạnh máy được vát phẳng vô cùng mạnh mẽ và cá tính.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/iphone-13-pro-max-1-3.jpg?alt=media&token=fee5b91a-1412-453e-9b72-bde0e823cc8e",
+      "name": "Điện thoại iPhone 12 mini 64GB",
+      "origin": "abc",
+      "price": 19900000,
+      "producer": "abc"
+    },
+    "sdhbfadhf": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Iphone",
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Hiệu năng mạnh mẽ hàng đầu iPhone 13 mini được trang bị bộ vi xử lý A15 Bionic sản xuất trên tiến trình 5 nm giúp cải thiện hiệu suất và giảm điện năng tiêu thụ đến 15% so với phiên bản A14 Bionic trước đó, đáp ứng hoàn hảo trong công việc cũng như trong giải trí của người dùng tốt hơn.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/iphone-13-pro-max-1-3fvfvf.jpg?alt=media&token=83495f71-e7ba-452c-8c99-ca98655bd90e",
+      "name": "Điện thoại iPhone 13 mini 128GB",
+      "origin": "abc",
+      "price": 18500000,
+      "producer": "abc"
+    },
+    "sfagvbt753": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Samsung",
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Galaxy S22 Ultra 5G được kế thừa form thiết kế từ những dòng Note trước đây của hãng đem đến cho bạn có cảm giác vừa mới lạ vừa hoài niệm. Trọng lượng của máy khoảng 228 g cho cảm giác cầm nắm đầm tay, khi cầm máy trần thì hơi có cảm giác dễ trượt.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/sdcdadcdca.jpg?alt=media&token=954b33c6-a6a1-4905-abb0-b56b397e79d4",
+      "name": "Điện thoại Samsung Galaxy S22 Ultra 5G 128GB",
+      "origin": "abc",
+      "price": 30990000,
+      "producer": "abc"
+    },
+    "sfvkwhfb326": {
+      "active": "1",
+      "brand": "xyz",
+      "category": "Điện thoại Samsung",
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Nổi bật với ngoại hình đầy ấn tượng Samsung đã trình làng Galaxy M53 với ba phiên bản màu vô cùng đẹp mắt như mình đang cầm trên tay, với tone màu có hơi sẫm đi một tí làm toát lên một vẻ huyền bí đầy cuốn hút và thanh lịch.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/adaqdqed.jpg?alt=media&token=b5d65169-7b5b-41cb-a0c0-03b76b7f6523",
+      "name": "Điện thoại Samsung Galaxy M53",
+      "origin": "mno",
+      "price": 12290000,
+      "producer": "abc"
+    },
+    "snedtse75e": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Xiaomi",
+      "comment": {
+        "61lB8RYxkopf86jdrtzMA": {
+          "comment": "San pham dep",
+          "customerName": "Le Van B",
+          "id": "61lB8RYxkopf86jdrtzMA",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1653896355624.png?alt=media&token=67d6513d-3791-45bd-a8e9-f608abf285c4",
+          "userId": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2"
+        },
+        "hyLxvQ54QK4nGG89caMYA": {
+          "comment": "so great",
+          "customerName": "Thank Neef May Ban ",
+          "id": "hyLxvQ54QK4nGG89caMYA",
+          "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1654011212119.png?alt=media&token=a687f8bd-3767-48db-b3a9-0f8e76494165",
+          "userId": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2"
+        }
+      },
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Hiệu năng vượt trội với Snapdragon 732G Mi 11 Lite trang bị con chip đến từ Qualcomm, sản xuất trên tiến trình 8 nm sẵn sàng cùng bạn chiến mọi tựa game phổ biến hiện nay với tốc độ tối đa lên đến 2.3 GHz.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/xiaomi-mi-11-lite-4g-xanh-duong-1-org.jpg?alt=media&token=87024a24-a3df-4b65-bdac-7d6e8dff4a7d",
+      "name": "Điện thoại Xiaomi Mi 11 Lite",
+      "origin": "abc",
+      "price": 7990000,
+      "producer": "abc"
+    },
+    "srgthbte54g5h": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Iphone",
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "Thay vì sở hữu màn hình OLED truyền thống, chiếc smartphone này sở hữu màn hình LCD.  Bù lại với công nghệ True Tone cùng màn hình tràn viền rộng tới 6.1 inch, mọi trải nghiệm trên máy vẫn đem lại sự thích thú và hoàn hảo, như dòng cao cấp khác của Apple.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/474395189.jpg?alt=media&token=0741dd28-8112-43d3-898f-fb0a70aba1a0",
+      "name": "Điện thoại iPhone XR 128GB",
+      "origin": "abc",
+      "price": 13490000,
+      "producer": "abc"
+    },
+    "vdsfvcn436tcdsc": {
+      "active": "1",
+      "brand": "abc",
+      "category": "Điện thoại Iphone",
+      "creator": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2",
+      "describe": "iPhone SE 2020 vẫn có kích thước 4.7 inch, tỉ lệ màn hình cũ 16:9 và các cạnh viền vẫn dày. Tuy nhiên kích thước chung của máy vẫn thuộc hàng nhỏ gọn, cực kì vừa vặn và dễ sử dụng bằng một tay.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/fscsfrfgrgrg.jpg?alt=media&token=3ba76bd2-2c45-4f88-a5c4-a546a377dc8d",
+      "name": "Điện thoại iPhone SE 64GB (2020) (Hộp mới)",
+      "origin": "abc",
+      "price": 10000000,
+      "producer": "abc"
+    }
+  },
+  "seen": {
+    "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2": {
+      "XuRyXRLIVezwIqvusBzLx": "ngrsnnsaa",
+      "cjP6kwutpFaWiQ0U3guzz": "snedtse75e",
+      "eadTR3U6IJdFcL1aFQKZA": "vdsfvcn436tcdsc",
+      "f7yG4QGKu5qpHxdRqssYO": "eeeccdsaasac",
+      "jCV3nrbS6JIt0ym6wQ37F": "rynfsxnfgsry",
+      "jOLYq6pCWsrR50uKJye8L": "hmsntyshs",
+      "py5cvg6186wL5KwtU22OE": "sidcjsdcsioj",
+      "rUbe9PCt1UASO7xW1loDX": "srgthbte54g5h",
+      "uQqXDVfxsd9WFETB51ISv": "vdsfvcn436tcdsc",
+      "xz1aGNCKC5RY8OAnUTXwG": "sfvkwhfb326",
+      "yGYlJIgVowgjPgPlnDUIH": "sfagvbt753",
+      "z84zUYFbmk1RINcP0f3QT": "ndtest464"
+    },
+    "SZy49QMDoUO5lf8u3YwCDVEX8Ky2": {
+      "MuRoLYie2pd8PX0Xxq8ga": "ndtest464",
+      "QK9ipdYhzRRGmc6C4OtkI": "ndtest464",
+      "Sd8JpKdLy6B31ZeHWp0na": "ndtest464",
+      "U6p6MV2cLuE2QZH7cgFTu": "ndtest464",
+      "UYHN75Jo4mMW0J7ZiP9bw": "ndtest464",
+      "XU7CtyvWyI3WpxthEtHfN": "ngrsnnsaa",
+      "a0iI2XGuJgLjBv3Q9DVwG": "fdebtbdzs",
+      "btNQseL5DfaOBpXwBg9Qt": "ndtest464",
+      "elVXvuxzOxmsXbVVQl4T8": "ndtest464",
+      "fi3GqvFnFVbCT9OqFws5A": "ndtest464",
+      "ksvn2yBWH7b2v2pbywoGn": "ndtest464",
+      "l12oVPZH6UyuTkM5Fr4On": "ndtest464",
+      "oOXeJ6rOV9vRKegj7AMxW": "ndtest464",
+      "soIu3rstlh6ZHOk9DzKKv": "snedtse75e",
+      "tJlEbyEMwDHYGuPyDTSMU": "ndtest464",
+      "tlFryeCiwLmpoNx3yU7cz": "ndtest464",
+      "tqNUMepQI0JMJIeub7rjT": "srgthbte54g5h",
+      "tvChU2ztXvSFoyNU9c48M": "rynfsxnfgsry",
+      "ufwiAH9g5wgU0cng5T7sp": "vdsfvcn436tcdsc",
+      "ugeNN5lYz9kqjBf9zGoU8": "eeeccdsaasac",
+      "w2NveJs9ienoTrj8uB7BL": "eeeccdsaasac",
+      "wkeBfbKQZzmAK6uktWCDF": "sfvkwhfb326",
+      "x98519ljES1JLktDY6Ue9": "vdsfvcn436tcdsc",
+      "xbll21xAQCN2LCwffAyt4": "7rnSWic4TLqs6hw7PTRiQ",
+      "xco0GpVgeeOlYztcea38Z": "sdcfddvsssdeerf",
+      "yNxcbNkh9eBNqhYmmaW5j": "hmsntyshs",
+      "ysCHEtT1CEZ1QR5AkAgja": "ndtest464",
+      "zw5VRld9xwn5ZN6tUj50x": "ndtest464"
+    }
+  },
+  "user": {
+    "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2": {
+      "address": "Don't Nine",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1654011212119.png?alt=media&token=a687f8bd-3767-48db-b3a9-0f8e76494165",
+      "email": "c@gmail.com",
+      "joinTime": "31-05-2022 22:33:32",
+      "name": "Phan Gia Anh",
+      "role": "kh",
+      "token": "dhhzDUSHQGigjo7HQNSQKA:APA91bFZ46H-x_SGwS3Djv0AJcNrPZqQgHVsQsORbcpKZsUDQDaE0Kj3hicpk552D07GwktJGtv1vQNe6HiQ6sBKfEVnl1-q_NjsmpIynVvgFWxxQ72JgWO4_UCao8htySRwdRGezn8o",
+      "uid": "Ec2e3hk4EsUQHqKKvBZDOUPkUHs2"
+    },
+    "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2": {
+      "address": "Ha Noi",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1654277122011.png?alt=media&token=b977d1c0-684b-4f6b-a298-12b760b8678d",
+      "email": "a@gmail.com",
+      "joinTime": "30-05-2022 01:56:53",
+      "name": "Nguyễn Ngọc Thạch",
+      "role": "admin",
+      "token": "dhhzDUSHQGigjo7HQNSQKA:APA91bFZ46H-x_SGwS3Djv0AJcNrPZqQgHVsQsORbcpKZsUDQDaE0Kj3hicpk552D07GwktJGtv1vQNe6HiQ6sBKfEVnl1-q_NjsmpIynVvgFWxxQ72JgWO4_UCao8htySRwdRGezn8o",
+      "uid": "OcS4SXFH9OUqfrJ91tZTI3ZeRlA2"
+    },
+    "SZy49QMDoUO5lf8u3YwCDVEX8Ky2": {
+      "address": "Ha Noi",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/fonedb-faa27.appspot.com/o/image1653896355624.png?alt=media&token=67d6513d-3791-45bd-a8e9-f608abf285c4",
+      "email": "b@gmail.com",
+      "joinTime": "30-05-2022 14:39:15",
+      "name": "Nguyễn Mạnh Trường",
+      "role": "kh",
+      "token": "cK0R3BhGTyug6LQyvTAjAr:APA91bEHVYtg7Y008x3hLZJBDXGlgjjYkUtQvB13l6raPoJrJYlSP4NpjWv7ZVDDYsU0dIhJbyqk5sbrP81ISg5_-CfySA7MfhXqPDtozl6yRXtxG58jMCnXWp7XNcD19NtRtndEysfQ",
+      "uid": "SZy49QMDoUO5lf8u3YwCDVEX8Ky2"
+    }
+  }
+}
