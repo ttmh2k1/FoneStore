@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,21 +22,19 @@ import java.util.Locale;
 import hcmute.fonestore.Object.Chats;
 import hcmute.fonestore.R;
 
-public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.MyHolder>{
+public class ChatMessageOfUserAdapter extends RecyclerView.Adapter<ChatMessageOfUserAdapter.MyHolder>{
 
     private static final int MSG_TYPE_LEFT=0;
     private static final int MSG_TYPE_Right=1;
 
     Context context;
     List<Chats> chatsList;
-    String imageUrl;
 
     FirebaseUser fUSer;
 
-    public ChatMessageAdapter(Context context, List<Chats> chatsList, String imageUrl) {
+    public ChatMessageOfUserAdapter(Context context, List<Chats> chatsList) {
         this.context = context;
         this.chatsList = chatsList;
-        this.imageUrl = imageUrl;
     }
 
     @NonNull
@@ -45,7 +42,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         if(viewType == MSG_TYPE_LEFT){
-            view = LayoutInflater.from(context).inflate(R.layout.row_message_for_detail_chat, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.row_message_for_detail_chat_of_user, parent, false);
         }else {
             view = LayoutInflater.from(context).inflate(R.layout.row_send_message_for_detail_chat, parent, false);
         }
@@ -64,16 +61,13 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
         holder.tvmessage.setText(message);
         holder.tvDate.setText(time);
-        Glide.with(context).load(imageUrl).placeholder(R.drawable.img_no_image).into(holder.avatar);
 
         if(position == chatsList.size() - 1){
 //            Toast.makeText(context, String.valueOf( chatsList.get(position).isSeen()), Toast.LENGTH_SHORT).show();
 //            chatsList.get(position).setSeen(true);
             if(chatsList.get(position).isSeen() == true){
                 holder.isSeen.setText("Seen");
-//                Toast.makeText(context, "seen", Toast.LENGTH_SHORT).show();
             }else {
-//                Toast.makeText(context, "Delivered", Toast.LENGTH_SHORT).show();
                 holder.isSeen.setText("Delivered");
             }
         }
@@ -91,7 +85,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     @Override
     public int getItemViewType(int position) {
         fUSer = FirebaseAuth.getInstance().getCurrentUser();
-        if(chatsList.get(position).getSender().equals("admin")){
+        if(chatsList.get(position).getSender().equals(fUSer.getUid())){
             return MSG_TYPE_Right;
         }
         else {
@@ -100,12 +94,10 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-        ImageView avatar;
         TextView tvmessage, tvDate, isSeen;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            avatar = itemView.findViewById(R.id.avatar);
             tvmessage = itemView.findViewById(R.id.tvmessage);
             tvDate = itemView.findViewById(R.id.tvDate);
             isSeen = itemView.findViewById(R.id.isSeen) ;

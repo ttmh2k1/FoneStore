@@ -6,18 +6,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,11 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import hcmute.fonestore.Object.Chats;
-import hcmute.fonestore.Object.User;
 import hcmute.fonestore.R;
 import hcmute.fonestore.RecyclerViewAdapter.ChatMessageAdapter;
+import hcmute.fonestore.RecyclerViewAdapter.ChatMessageOfUserAdapter;
 
-public class DetailChatActivity extends AppCompatActivity {
+public class ChatForUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerViewChat;
@@ -47,18 +44,18 @@ public class DetailChatActivity extends AppCompatActivity {
     DatabaseReference ref;
     FirebaseAuth mAuth;
     String UserID, otherID, otherImage;
-//
+    //
     //checking if seen or not yet
     ValueEventListener seenListener;
     DatabaseReference userRefForSeen;
 
     List<Chats> chatsList;
-    ChatMessageAdapter chatMessageAdapter;
+    ChatMessageOfUserAdapter chatMessageOfUserAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_chat);
+        setContentView(R.layout.activity_chat_for_user);
 
         toolbar = findViewById(R.id.toolbar);
 //        setSupportActionToolbar(toolbar);
@@ -77,43 +74,21 @@ public class DetailChatActivity extends AppCompatActivity {
         recyclerViewChat.setHasFixedSize(true);
         recyclerViewChat.setLayoutManager(layoutManager);
 
-        UserID = mAuth.getInstance().getCurrentUser().getUid();
-        Intent intent = getIntent();
-        otherID = intent.getStringExtra("otherID");
-
-        ref =  FirebaseDatabase.getInstance().getReference("user");
-        
-        //find User match when click in ChatActivity and set value of otherImage for ChatMessageAdapter
-        ref.orderByChild("uid").equalTo(otherID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    String name = (String) dataSnapshot1.child("name").getValue();
-                    otherImage = dataSnapshot1.child("avatar").getValue().toString();
-                    tvUsername.setText(name);
-                    Glide.with(DetailChatActivity.this).load(otherImage).placeholder(R.drawable.img_no_image).into(user_img1);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        
+        UserID =  mAuth.getInstance().getCurrentUser().getUid();
+        otherID = "admin" ;
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String message = etMessage.getText().toString().trim();
                 if(TextUtils.isEmpty(message)){
-                    Toast.makeText(DetailChatActivity.this, "Cannot send with null message" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChatForUserActivity.this, "Cannot send with null message" , Toast.LENGTH_SHORT).show();
                 }else {
                     sendMessage(message);
                 }
             }
         });
-        
+
+
         ReadMessage();
         seenMessage();
     }
@@ -125,7 +100,7 @@ public class DetailChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot i : snapshot.getChildren()){
                     Chats chat = i.getValue(Chats.class);
-                    if(chat.getReceiver().equals("admin") && chat.getSender().equals(otherID)){
+                    if(chat.getReceiver().equals(UserID) && chat.getSender().equals(otherID)){
                         HashMap<String , Object> hashMap = new HashMap<>();
                         hashMap.put("isSeen", true);
                         i.getRef().updateChildren(hashMap);
@@ -149,14 +124,14 @@ public class DetailChatActivity extends AppCompatActivity {
                 chatsList.clear();
                 for(DataSnapshot item : snapshot.getChildren()){
                     Chats chat = item.getValue(Chats.class);
-                    if(chat.getSender().equals("admin") && chat.getReceiver().equals(otherID) ||
-                    chat.getReceiver().equals("admin") && chat.getSender().equals(otherID)){
+                    if(chat.getSender().equals(UserID) && chat.getReceiver().equals(otherID) ||
+                            chat.getReceiver().equals(UserID) && chat.getSender().equals(otherID)){
                         chatsList.add(chat);
                     }
                 }
-                ChatMessageAdapter chatMessageAdapter = new ChatMessageAdapter(DetailChatActivity.this, chatsList, otherImage);
-                chatMessageAdapter.notifyDataSetChanged();
-                recyclerViewChat.setAdapter(chatMessageAdapter);
+                chatMessageOfUserAdapter = new ChatMessageOfUserAdapter(ChatForUserActivity.this, chatsList);
+                chatMessageOfUserAdapter.notifyDataSetChanged();
+                recyclerViewChat.setAdapter(chatMessageOfUserAdapter);
             }
 
             @Override
@@ -170,8 +145,8 @@ public class DetailChatActivity extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference();
         String Time = String.valueOf(System.currentTimeMillis());
         HashMap<String, Object> hashmap = new HashMap<>();
-        hashmap.put("sender", "admin");
-        hashmap.put("receiver", otherID);
+        hashmap.put("sender", UserID);
+        hashmap.put("receiver", "admin");
         hashmap.put("message", message);
         hashmap.put("time", Time );
         hashmap.put("isSeen", false);

@@ -1,13 +1,38 @@
 package hcmute.fonestore.Object;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.PropertyName;
 
 public class Product {
     @Exclude
     private String id;
 
     private String name, image, category, producer, brand, origin, describe, creator, active;
+
+    //thanh
     private Long price;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
+    private Long quantity;
+    @PropertyName("quantity")
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    @PropertyName("quantity")
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
+    }
+//
 
     public Product() {
     }

@@ -16,31 +16,22 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.ProductActivity;
 import hcmute.fonestore.Object.Product;
+import hcmute.fonestore.R;
 
-public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAdapterCart.MyViewHolder> {
+public class RecyclerViewAdapterCart1 extends RecyclerView.Adapter<RecyclerViewAdapterCart1.MyViewHolder> {
     private Context context;
     private ArrayList<Product> data;
-    private IBtnQuantityClick mClickBtnQuantity;
-    
-    public interface IBtnQuantityClick {
 
-        void addQuantity(Product product);
-
-        void subQuantity(Product product);
-    }
-
-    public RecyclerViewAdapterCart(Context context, ArrayList<Product> data, IBtnQuantityClick mClickBtnQUantity) {
+    public RecyclerViewAdapterCart1(Context context, ArrayList<Product> data) {
         this.context = context;
         this.data = data;
-        this.mClickBtnQuantity = mClickBtnQUantity;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_cart, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_cart1, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -54,29 +45,12 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
         holder.price.setText(p.getFormattedPrice());
         Glide.with(context).load(p.getImage()).placeholder(R.drawable.img_no_image).into(holder.image);
 
-        holder.tvQuantity.setText(p.getQuantity().toString());
-        holder.tvQuantity1.setText(p.getQuantity().toString());
-        holder.tvTotal.setText(String.format("%,d vnđ", p.getPrice()*p.getQuantity()));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductActivity.class);
                 intent.putExtra("id", p.getId());
                 context.startActivity(intent);
-            }
-        });
-        
-        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mClickBtnQuantity.addQuantity(data.get(position));
-            }
-        });
-        
-        holder.btnSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mClickBtnQuantity.subQuantity(data.get(position));
             }
         });
     }
@@ -100,8 +74,8 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
         return data;
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView producer, name, price, tvQuantity, tvQuantity1, tvTotal;
-        ImageView image, btnAdd, btnSub;
+        TextView producer, name, price ;
+        ImageView image;
         CardView cardView;
 
         public MyViewHolder(View itemView) {
@@ -112,11 +86,6 @@ public class RecyclerViewAdapterCart extends RecyclerView.Adapter<RecyclerViewAd
             name = (TextView) itemView.findViewById(R.id.cart_name);
             image = (ImageView) itemView.findViewById(R.id.imageView_cart);
             cardView =  itemView.findViewById(R.id.card_cart);
-            tvQuantity = itemView.findViewById(R.id.tvQuantity);
-            btnAdd = itemView.findViewById(R.id.btnAdd);
-            btnSub = itemView.findViewById(R.id.btnSub);
-            tvQuantity1 = itemView.findViewById(R.id.tvQuantity1);
-            tvTotal = itemView.findViewById(R.id.tvTotal);
         }
     }
 }

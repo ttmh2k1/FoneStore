@@ -83,7 +83,17 @@ public class SeenProductActivity extends AppCompatActivity {
                 if (snapshot.exists()) layout_no_recent.setVisibility(View.GONE);
                 loading_view_recent.setVisibility(View.GONE);
 
-                myAdapter = new RecyclerViewAdapterCart(SeenProductActivity.this, lstProduct);
+                myAdapter = new RecyclerViewAdapterCart(SeenProductActivity.this, lstProduct, new RecyclerViewAdapterCart.IBtnQuantityClick() {
+                    @Override
+                    public void addQuantity(Product product) {
+
+                    }
+
+                    @Override
+                    public void subQuantity(Product product) {
+
+                    }
+                });
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     FirebaseDatabase.getInstance().getReference().child("product").child(ds.getValue().toString()).addValueEventListener(new ValueEventListener() {

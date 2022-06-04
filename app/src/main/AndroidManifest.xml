@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoneStore">
         <activity
+            android:name=".ChatForUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BillActivity"
+            android:exported="false" />
+        <activity
             android:name=".Animation.SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -39,6 +45,8 @@
         <activity android:name=".fragment.user.admin.ProductMgrActivity" />
         <activity android:name=".Activity.ChatActivity" />
         <activity android:name=".Activity.DetailChatActivity" />
+        <activity android:name=".Activity.BillActivity" />
+        <activity android:name=".Activity.ChatForUserActivity" />
     </application>
 
 </manifest>

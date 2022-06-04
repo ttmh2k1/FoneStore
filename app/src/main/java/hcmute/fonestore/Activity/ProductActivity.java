@@ -3,6 +3,7 @@ package hcmute.fonestore.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +27,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import hcmute.fonestore.Animation.LoadingDialog;
 import hcmute.fonestore.Object.Notification;
@@ -283,21 +287,29 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         loadingDialog.startLoadingDialog();
 
         ref = FirebaseDatabase.getInstance().getReference();
-
-        ref.child("cart").child(currentUser.getUid()).addValueEventListener(new ValueEventListener() {
+        ref.child("cart").child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean existed = false;
-
                 for (DataSnapshot ds: snapshot.getChildren()) {
-                    if (ds.getValue().toString().equals(pid)) {
-                        existed = true;
-                        break;
+                    Product tempPro = ds.getValue(Product.class);
+                    if (tempPro!=null){
+                        if(tempPro.getId().equals(pid)){
+                            Long quantity = (Long) ds.child("quantity").getValue();
+                            quantity+=1;
+                            HashMap<String , Object> hashMap = new HashMap<>();
+                            hashMap.put("quantity", quantity);
+                            ds.getRef().child("quantity").setValue(quantity);
+                            existed = true;
+                            loadingDialog.dismissDialog();
+                        }
                     }
                 }
 
                 if (!existed) {
-                    ref.child("cart").child(currentUser.getUid()).child(randomString.nextString()).setValue(pid).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    currentProduct.setId(pid);
+                    currentProduct.setQuantity(1L);
+                    ref.child("cart").child(currentUser.getUid()).child(pid).setValue(currentProduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -308,10 +320,6 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                             loadingDialog.dismissDialog();
                         }
                     });
-                }
-                else {
-                    Toast.makeText(ProductActivity.this, "Đã thêm vào Giỏ hàng!", Toast.LENGTH_SHORT).show();
-                    loadingDialog.dismissDialog();
                 }
             }
 

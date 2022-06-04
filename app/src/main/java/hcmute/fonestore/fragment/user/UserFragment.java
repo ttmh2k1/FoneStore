@@ -2,6 +2,7 @@ package hcmute.fonestore.fragment.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import hcmute.fonestore.Activity.BillActivity;
 import hcmute.fonestore.Activity.ChatActivity;
+import hcmute.fonestore.Activity.ChatForUserActivity;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Activity.FavoriteActivity;
@@ -33,7 +36,7 @@ import hcmute.fonestore.fragment.user.admin.UserMgrActivity;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView cart;
-    Button btnFavorite, btnLogout, btnAccount, aboutus, setting, btnSeenProduct, btnChat;
+    Button btnFavorite, btnLogout, btnAccount, aboutus, setting, btnSeenProduct, btnChat, user_Bill;
     Button btnAdminAccountMgr, btnAdminProductMgr, btnAdminCreateProduct;
     TextView email, name, address;
     ImageView img;
@@ -41,6 +44,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     FirebaseAuth mAuth;
     DatabaseReference ref;
     Intent intent;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         aboutus = root.findViewById(R.id.user_support);
         setting = root.findViewById(R.id.user_setting);
         btnChat = root.findViewById(R.id.user_chat);
+        user_Bill = root.findViewById(R.id.user_Bill);
 
         loadData();
 
@@ -76,7 +81,32 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnAdminProductMgr.setOnClickListener(this);
         btnAdminCreateProduct.setOnClickListener(this);
         btnSeenProduct.setOnClickListener(this);
-        btnChat.setOnClickListener(this);
+        user_Bill.setOnClickListener(this);
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userID = mAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase.getInstance().getReference("user").child(userID).child("role").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue().toString().equals("admin")){
+                            Log.e("admin", "true");
+                            intent = new Intent(getActivity(), ChatActivity.class);
+                            startActivity(intent);
+                        }else {
+                            intent = new Intent(getActivity(), ChatForUserActivity.class);
+                            startActivity(intent);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
 
         return root;
     }
@@ -164,10 +194,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), AddProductActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.user_chat:
-                intent = new Intent(getActivity(), ChatActivity.class);
+            case R.id.user_Bill:
+                intent = new Intent(getActivity(), BillActivity.class);
                 startActivity(intent);
-                break;
         }
     }
 }
