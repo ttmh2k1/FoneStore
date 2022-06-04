@@ -2,6 +2,7 @@ package hcmute.fonestore.fragment.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import hcmute.fonestore.Activity.ChatActivity;
+import hcmute.fonestore.Activity.ChatForUserActivity;
 import hcmute.fonestore.R;
 import hcmute.fonestore.Activity.CartActivity;
 import hcmute.fonestore.Activity.FavoriteActivity;
@@ -33,7 +36,7 @@ import hcmute.fonestore.fragment.user.admin.UserMgrActivity;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     ImageView cart;
-    Button btnFavorite, btnLogout, btnAccount, btnOrder, aboutus, setting, btnSeenProduct;
+    Button btnFavorite, btnLogout, btnAccount, btnOrder, aboutus, setting, btnSeenProduct,  user_chat;
     Button btnAdminAccountMgr, btnAdminProductMgr, btnAdminCreateProduct, btnAdminOrderMgr;
     TextView email, name, address;
     ImageView img;
@@ -56,6 +59,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnAdminProductMgr = root.findViewById(R.id.btn_admin_product_mgr);
         btnAdminCreateProduct = root.findViewById(R.id.btn_admin_create_product);
         btnAdminOrderMgr = root.findViewById(R.id.btn_admin_order_mgr);
+        user_chat = root.findViewById(R.id.user_chat);
 
         cart = root.findViewById(R.id.btn_user_cart);
         email = root.findViewById(R.id.user_email);
@@ -79,6 +83,31 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         btnSeenProduct.setOnClickListener(this);
         btnOrder.setOnClickListener(this);
         btnAdminOrderMgr.setOnClickListener(this);
+        user_chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userID = mAuth.getInstance().getCurrentUser().getUid();
+                FirebaseDatabase.getInstance().getReference("user").child(userID).child("role").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.getValue().toString().equals("admin")){
+                            Log.e("admin", "true");
+                            intent = new Intent(getActivity(), ChatActivity.class);
+                            startActivity(intent);
+                        }else {
+                            intent = new Intent(getActivity(), ChatForUserActivity.class);
+                            startActivity(intent);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
 
         return root;
     }

@@ -12,6 +12,9 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoneStore">
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
 
         <service
             android:name=".NotificationService"
@@ -48,6 +51,9 @@
         <activity android:name=".fragment.user.admin.UserMgrActivity" />
         <activity android:name=".fragment.user.admin.ProductMgrActivity" />
         <activity android:name=".fragment.user.admin.OrderMgrActivity" />
+        <activity android:name=".Activity.ChatActivity" />
+        <activity android:name=".Activity.ChatForUserActivity" />
+        <activity android:name=".Activity.DetailChatActivity" />
     </application>
 
 </manifest>
