@@ -140,6 +140,7 @@ public class CartActivity extends AppCompatActivity {
                                         public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                             deleteFromCart(item.getId());
                                             Intent intent = new Intent(CartActivity.this, BillActivity.class);
+
                                             startActivity(intent);
                                         }
                                     });
